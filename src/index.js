@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import store from "redux/config/configStore";
+import store from "redux/config/configStore"; //@reduxtoolkit어쩌구에서 import하면 에러남!
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

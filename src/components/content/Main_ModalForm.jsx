@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addContent } from "redux/modules/content";
+import { addContent } from "redux/modules/contentsSlice";
 import shortid from "shortid";
 import styled from "styled-components";
 
