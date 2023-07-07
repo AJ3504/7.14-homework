@@ -1,7 +1,8 @@
 import React from "react";
+import { combineReducers, createStore } from "redux";
 
-function configStore() {
-  return <div>configStore</div>;
-}
+const rootReducer = combineReducers({});
 
-export default configStore;
+const store = createStore(rootReducer);
+
+export default store;
