@@ -17,17 +17,17 @@ const Main_ContentList = () => {
     navigate(`/detail/${contentId}`);
   };
 
-  //❶R : axios로 GET 요청
-  const fetchContents = async () => {
-    //dB.GET
-    const { data } = await axios.get("http://localhost:4000/contents");
+  // //❶R : axios로 GET 요청
+  // const fetchContents = async () => {
+  //   //dB.GET
+  //   const { data } = await axios.get("http://localhost:4000/contents");
 
-    //redux THUNK
-  };
+  //   //redux THUNK
+  // };
 
-  useEffect(() => {
-    fetchContents();
-  }, []);
+  // useEffect(() => {
+  //   fetchContents();
+  // }, []);
 
   return (
     <>
@@ -36,7 +36,11 @@ const Main_ContentList = () => {
         return (
           <div
             key={content.id}
-            style={{ border: "solid", margin: "10px", padding: "10px" }}
+            style={{
+              border: "solid",
+              margin: "10px",
+              padding: "10px",
+            }}
           >
             <h3>{content.title}</h3>
             <p>{content.body}</p>
