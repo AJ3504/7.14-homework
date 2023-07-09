@@ -63,17 +63,11 @@ function Header() {
           height: "40px",
         }}
       >
-        <>
-          <h3 style={{ marginTop: "13px", paddingLeft: "20px" }}>블로그홈</h3>
-        </>
-        <>
-          <h3 style={{ marginTop: "13px" }}>주제별 보기</h3>
-        </>
-        <>
-          <h3 style={{ marginTop: "13px", paddingRight: "20px" }}>
-            이달의 블로그
-          </h3>
-        </>
+        <h3 style={{ marginTop: "13px", paddingLeft: "20px" }}>블로그홈</h3>
+        <h3 style={{ marginTop: "13px" }}>주제별 보기</h3>
+        <h3 style={{ marginTop: "13px", paddingRight: "20px" }}>
+          이달의 블로그
+        </h3>
       </div>
 
       <hr />

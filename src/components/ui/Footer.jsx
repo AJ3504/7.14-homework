@@ -16,7 +16,7 @@ function Footer() {
           height: "120px",
           bottom: "0px",
           position: "absolute",
-          backgroundColor: "#1a5d1aca",
+          backgroundColor: "#606C5D",
         }}
       >
         푸터입니다

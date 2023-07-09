@@ -1,0 +1,1 @@
+클릭한 바로 그 게시글 = targetContent

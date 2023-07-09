@@ -56,6 +56,7 @@ const Main_ModalForm = () => {
   return (
     <div>
       <button onClick={openModal}>게시글 쓰기</button>
+
       {isOpen && (
         <div>
           <form id="modalForm" className="modalForm" onSubmit={onSubmitHandler}>
