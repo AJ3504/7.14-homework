@@ -40,13 +40,48 @@ const Main_ContentList = () => {
               border: "solid",
               margin: "10px",
               padding: "10px",
+              fontWeight: "bold",
             }}
           >
-            <h3>{content.title}</h3>
-            <p>{content.body}</p>
-            <button onClick={() => onContentClick(content.id)}>
-              게시글 상세보기
-            </button>
+            <div>
+              {content.newTitle && content.newBody ? (
+                <div className="editedContent">
+                  <ul
+                    style={{
+                      border: "solid",
+                      margin: "10px",
+                      padding: "10px",
+                    }}
+                  >
+                    <li>
+                      {content.newTitle}
+                      {content.newBody}
+                    </li>
+                    <button onClick={() => onContentClick(content.id)}>
+                      게시글 상세보기
+                    </button>
+                  </ul>
+                </div>
+              ) : (
+                <div className="previousContent">
+                  <ul
+                    style={{
+                      border: "solid",
+                      margin: "10px",
+                      padding: "10px",
+                    }}
+                  >
+                    <li>
+                      {content.title}
+                      {content.body}
+                    </li>
+                    <button onClick={() => onContentClick(content.id)}>
+                      게시글 상세보기
+                    </button>
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
         );
       })}
