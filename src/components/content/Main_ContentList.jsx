@@ -43,16 +43,22 @@ const Main_ContentList = () => {
               fontWeight: "bold",
             }}
           >
-            <div>
+            <div className="editedContent">
+              <ul>
+                <li>
+                  {content?.newTitle ? content?.newTitle : content?.title}
+                  {content?.newBody ? content?.newBody : content?.Body}
+                </li>
+                <button onClick={() => onContentClick(content.id)}>
+                  게시글 상세보기
+                </button>
+              </ul>
+            </div>
+
+            {/* <div>
               {content.newTitle && content.newBody ? (
                 <div className="editedContent">
-                  <ul
-                    style={{
-                      border: "solid",
-                      margin: "10px",
-                      padding: "10px",
-                    }}
-                  >
+                  <ul>
                     <li>
                       {content.newTitle}
                       {content.newBody}
@@ -64,13 +70,7 @@ const Main_ContentList = () => {
                 </div>
               ) : (
                 <div className="previousContent">
-                  <ul
-                    style={{
-                      border: "solid",
-                      margin: "10px",
-                      padding: "10px",
-                    }}
-                  >
+                  <ul>
                     <li>
                       {content.title}
                       {content.body}
@@ -81,7 +81,7 @@ const Main_ContentList = () => {
                   </ul>
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
         );
       })}

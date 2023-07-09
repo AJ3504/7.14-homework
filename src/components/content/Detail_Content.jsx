@@ -115,7 +115,7 @@ const Detail_Content = () => {
             </ul>
           </div>
         ) : (
-          <div className="previousContent">
+          <div className="container">
             <ul
               style={{
                 border: "solid",
@@ -124,8 +124,12 @@ const Detail_Content = () => {
               }}
             >
               <li>
-                {targetContent?.title}
-                {targetContent?.body}
+                {targetContent?.newTitle
+                  ? targetContent?.newTitle
+                  : targetContent?.title}
+                {targetContent?.newBody
+                  ? targetContent?.newBody
+                  : targetContent?.body}
               </li>
               <div>
                 <button onClick={() => editHandler(targetContent?.id)}>
