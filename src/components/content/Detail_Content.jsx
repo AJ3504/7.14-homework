@@ -97,52 +97,32 @@ const Detail_Content = () => {
       </div>
 
       {/* ------결과물(수정결과물 : 기존결과물)------ */}
-      <div>
-        {editMode && newTitle && newBody && showUpdatedContent ? (
-          <div className="editedContent">
-            <ul
-              style={{
-                border: "solid",
-                margin: "10px",
-                padding: "10px",
-              }}
-            >
-              <li>
-                {targetContent?.newTitle}
-                {targetContent?.newBody}
-              </li>
-              <button onClick={() => navigate("/")}>이전 화면으로</button>
-            </ul>
+      <div className="container">
+        <ul
+          style={{
+            border: "solid",
+            margin: "10px",
+            padding: "10px",
+          }}
+        >
+          <li>
+            {targetContent?.newTitle
+              ? targetContent?.newTitle
+              : targetContent?.title}
+            {targetContent?.newBody
+              ? targetContent?.newBody
+              : targetContent?.body}
+          </li>
+          <div>
+            <button onClick={() => editHandler(targetContent?.id)}>
+              수정하기
+            </button>
+            <button onClick={() => deleteHandler(targetContent?.id)}>
+              삭제하기
+            </button>
+            <button onClick={() => navigate("/")}>이전 화면으로</button>
           </div>
-        ) : (
-          <div className="container">
-            <ul
-              style={{
-                border: "solid",
-                margin: "10px",
-                padding: "10px",
-              }}
-            >
-              <li>
-                {targetContent?.newTitle
-                  ? targetContent?.newTitle
-                  : targetContent?.title}
-                {targetContent?.newBody
-                  ? targetContent?.newBody
-                  : targetContent?.body}
-              </li>
-              <div>
-                <button onClick={() => editHandler(targetContent?.id)}>
-                  수정하기
-                </button>
-                <button onClick={() => deleteHandler(targetContent?.id)}>
-                  삭제하기
-                </button>
-                <button onClick={() => navigate("/")}>이전 화면으로</button>
-              </div>
-            </ul>
-          </div>
-        )}
+        </ul>
       </div>
     </>
   );

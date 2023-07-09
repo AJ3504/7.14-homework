@@ -47,7 +47,7 @@ const Main_ContentList = () => {
               <ul>
                 <li>
                   {content?.newTitle ? content?.newTitle : content?.title}
-                  {content?.newBody ? content?.newBody : content?.Body}
+                  {content?.newBody ? content?.newBody : content?.body}
                 </li>
                 <button onClick={() => onContentClick(content.id)}>
                   게시글 상세보기
@@ -55,6 +55,7 @@ const Main_ContentList = () => {
               </ul>
             </div>
 
+            {/* 추후 삭제하기 */}
             {/* <div>
               {content.newTitle && content.newBody ? (
                 <div className="editedContent">
