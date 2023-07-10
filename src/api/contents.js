@@ -18,8 +18,32 @@ const getContents = async () => {
 };
 
 //2. 데이터 추가
+// const addContent = async (newContent) => {
+//   console.log("콘솔3", response.data)
+// };
+
 const addContent = async (newContent) => {
-  await axios.post(`${process.env.REACT_APP_SERVER_URL}/contents`, newContent);
+  try {
+    await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/contents`,
+      newContent
+    );
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
 
-export { getContents, addContent };
+//3. 데이터 삭제
+const deleteContent = async (targetContentId) => {
+  try {
+    await axios.delete(
+      `${process.env.REACT_APP_SERVER_URL}/contents/${targetContentId}` //~contents중, id(targetContentId)번째 게시글을 삭제하는 로직
+    );
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export { getContents, addContent, deleteContent };

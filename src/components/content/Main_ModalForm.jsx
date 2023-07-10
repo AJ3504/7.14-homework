@@ -14,7 +14,7 @@ const Main_ModalForm = () => {
     //변경이 일어난 경우, 갱신해줘야 하는 데이터 없는지 생각 -> 있다면, 해당 쿼리 key를 invalidate
     onSuccess: () => {
       queryClient.invalidateQueries("contents");
-      console.log("성공하였습니다😀");
+      console.log("POST 성공하였습니다😀");
     },
   });
 

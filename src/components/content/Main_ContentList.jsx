@@ -30,6 +30,7 @@ const Main_ContentList = () => {
   return (
     <>
       {/* 메인페이지 랜더링부분 */}
+      {/* 비동기함수이므로, 데이터가 내려오기 전 화면 랜더링이 될 수도 있기 때문에 ?을 꼭 붙여주기 */}
       {data?.map((content) => {
         return (
           <div

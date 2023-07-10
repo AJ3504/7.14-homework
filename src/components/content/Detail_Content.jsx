@@ -1,9 +1,9 @@
-import { getContents } from "api/contents";
+import { deleteContent, getContents } from "api/contents";
 import React, { useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteContent, editContent } from "redux/modules/contentsSlice";
+import { editContent } from "redux/modules/contentsSlice";
 import shortid from "shortid";
 
 const Detail_Content = () => {
@@ -20,6 +20,17 @@ const Detail_Content = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  //react Query
+  //DELETE
+  const queryClient = useQueryClient();
+  const mutation = useMutation(deleteContent, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("contents");
+      console.log("DELETE 성공하였습니다😀");
+    },
+  });
+
+  //GET
   const { isLoading, isError, data } = useQuery("contents", getContents); //첫번째인자인 key값이 중요 (나중에 invalidate할 때 쓰임), 두번째 인자는 비동기함수
 
   if (isLoading) {
@@ -33,7 +44,7 @@ const Detail_Content = () => {
   const targetContent = data.find((item) => item.id === contentId);
   console.log("콘솔1", targetContent);
 
-  //❸게시글 Update (성공)
+  //❸게시글 Update
   const editHandler = (targetContentId) => {
     //
     setEditMode((prev) => !prev);
@@ -41,7 +52,8 @@ const Detail_Content = () => {
 
   //❹게시글 Delete
   const deleteHandler = (targetContentId) => {
-    dispatch(deleteContent(targetContentId));
+    // dispatch(deleteContent(targetContentId));
+    mutation.mutate(targetContentId);
     navigate("/");
   };
 
