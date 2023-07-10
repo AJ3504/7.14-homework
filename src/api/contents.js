@@ -17,12 +17,9 @@ const getContents = async () => {
   }
 };
 
-// const getContents = async () => {
-//   const response = await axios.get(
-//     `${process.env.REACT_APP_SERVER_URL}/contents`
-//   );
-//   console.log("콘솔2", response);
-//   return response; //response를 return해줘야, useQuery에서 addContent에 대한 응답 부분을 data로 받을 수 있음
-// };
+//2. 데이터 추가
+const addContent = async (newContent) => {
+  await axios.post(`${process.env.REACT_APP_SERVER_URL}/contents`, newContent);
+};
 
-export { getContents };
+export { getContents, addContent };

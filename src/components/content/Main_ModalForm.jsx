@@ -1,10 +1,23 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addContent } from "redux/modules/contentsSlice";
+// import { addContent } from "redux/modules/contentsSlice";
+import { addContent } from "api/contents";
 import shortid from "shortid";
 import styled from "styled-components";
+import { useMutation, useQueryClient } from "react-query";
 
 const Main_ModalForm = () => {
+  //react Query
+  const queryClient = useQueryClient();
+  //새로고침 없이 바로 업데이트되는 로직
+  const mutation = useMutation(addContent, {
+    //변경이 일어난 경우, 갱신해줘야 하는 데이터 없는지 생각 -> 있다면, 해당 쿼리 key를 invalidate
+    onSuccess: () => {
+      queryClient.invalidateQueries("contents");
+      console.log("성공하였습니다😀");
+    },
+  });
+
   //UseStates
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -41,13 +54,14 @@ const Main_ModalForm = () => {
       return;
     }
 
-    const newContnet = {
+    const newContent = {
       title,
       body,
       id: shortid.generate(),
     };
 
-    dispatch(addContent(newContnet));
+    // dispatch(addContent(newContent));
+    mutation.mutate(newContent);
 
     setTitle("");
     setBody("");

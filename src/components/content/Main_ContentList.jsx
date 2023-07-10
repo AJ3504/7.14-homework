@@ -13,7 +13,7 @@ const Main_ContentList = () => {
   //useSelector
   //ASIS// const contents = useSelector((state) => state.contentsSlice);
   //TOBE
-  const { isLoading, isError, data } = useQuery("contents", getContents); //첫번째인자(쿼리 이름)
+  const { isLoading, isError, data } = useQuery("contents", getContents); //첫번째인자인 key값이 중요 (나중에 invalidate할 때 쓰임), 두번째 인자는 비동기함수
 
   if (isLoading) {
     return <h1>로딩중입니다🥲</h1>;
@@ -30,7 +30,7 @@ const Main_ContentList = () => {
   return (
     <>
       {/* 메인페이지 랜더링부분 */}
-      {contents?.map((content) => {
+      {data?.map((content) => {
         return (
           <div
             key={content.id}
