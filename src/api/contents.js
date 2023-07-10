@@ -50,7 +50,7 @@ const deleteContent = async (targetContentId) => {
 const editContent = async (editedContent) => {
   try {
     await axios.patch(
-      `${process.env.REACT_APP_SERVER_URL}/contents/${editedContent.id}`,
+      `${process.env.REACT_APP_SERVER_URL}/contents/${editedContent.id}`, //그냥 id라고 하면 인식 안되고, editContent.id라고 해야 인식
       editedContent
     );
   } catch (error) {

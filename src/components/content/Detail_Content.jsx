@@ -22,7 +22,7 @@ const Detail_Content = () => {
   //react Query
   //DELETE
   const queryClient = useQueryClient();
-  const mutation = useMutation(deleteContent, {
+  const deleteMutation = useMutation(deleteContent, {
     onSuccess: () => {
       queryClient.invalidateQueries("contents");
       console.log("DELETE 성공하였습니다😀");
@@ -52,7 +52,7 @@ const Detail_Content = () => {
   console.log("콘솔1", targetContent);
 
   //❸게시글 Update
-  const editModeHandler = (targetContentId) => {
+  const editModeHandler = () => {
     //
     setEditMode((prev) => !prev);
   };
@@ -76,7 +76,7 @@ const Detail_Content = () => {
   //❹게시글 Delete
   const deleteHandler = (targetContentId) => {
     // dispatch(deleteContent(targetContentId));
-    mutation.mutate(targetContentId);
+    deleteMutation.mutate(targetContentId);
     navigate("/");
   };
 
@@ -127,9 +127,7 @@ const Detail_Content = () => {
               : targetContent?.body}
           </li>
           <div>
-            <button onClick={() => editModeHandler(targetContent?.id)}>
-              수정하기
-            </button>
+            <button onClick={editModeHandler}>수정하기</button>
             <button onClick={() => deleteHandler(targetContent?.id)}>
               삭제하기
             </button>
