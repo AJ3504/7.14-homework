@@ -1,1 +1,60 @@
 클릭한 바로 그 게시글 = targetContent
+
+{/* 메인페이지 랜더링부분 */}
+      {/* {contents?.map((content) => {
+        return (
+          <div
+            key={content.id}
+            style={{
+              border: "solid",
+              margin: "10px",
+              padding: "10px",
+              fontWeight: "bold",
+            }}
+          >
+            <div className="editedContent">
+              <ul>
+                <li>
+                  {content?.newTitle ? content?.newTitle : content?.title}
+                  <br />
+                  {content?.newBody ? content?.newBody : content?.body}
+                </li>
+                <button onClick={() => onContentClick(content.id)}>
+                  게시글 상세보기
+                </button>
+              </ul>
+            </div> */}
+
+      {/* --------------------------------------------------- */}
+
+      {/* 추후 삭제하기 */}
+      {/* <div>
+              {content.newTitle && content.newBody ? (
+                <div className="editedContent">
+                  <ul>
+                    <li>
+                      {content.newTitle}
+                      {content.newBody}
+                    </li>
+                    <button onClick={() => onContentClick(content.id)}>
+                      게시글 상세보기
+                    </button>
+                  </ul>
+                </div>
+              ) : (
+                <div className="previousContent">
+                  <ul>
+                    <li>
+                      {content.title}
+                      {content.body}
+                    </li>
+                    <button onClick={() => onContentClick(content.id)}>
+                      게시글 상세보기
+                    </button>
+                  </ul>
+                </div>
+              )}
+            </div> */}
+      {/* </div>
+        );
+      })} */}

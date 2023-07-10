@@ -1,4 +1,6 @@
+import { getContents } from "api/contents";
 import React, { useState } from "react";
+import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteContent, editContent } from "redux/modules/contentsSlice";
@@ -6,7 +8,7 @@ import shortid from "shortid";
 
 const Detail_Content = () => {
   //UseSelectors
-  const contents = useSelector((state) => state.contentsSlice);
+  // const contents = useSelector((state) => state.contentsSlice);
 
   //UseStates
   const [editMode, setEditMode] = useState(false);
@@ -18,8 +20,17 @@ const Detail_Content = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const { isLoading, isError, data } = useQuery("contents", getContents); //첫번째인자인 key값이 중요 (나중에 invalidate할 때 쓰임), 두번째 인자는 비동기함수
+
+  if (isLoading) {
+    return <h1>로딩중입니다🥲</h1>;
+  }
+  if (isError) {
+    return <h1>에러가 발생했습니다🥲</h1>;
+  }
+
   //기타
-  const targetContent = contents.find((item) => item.id === contentId);
+  const targetContent = data.find((item) => item.id === contentId);
   console.log("콘솔1", targetContent);
 
   //❸게시글 Update (성공)

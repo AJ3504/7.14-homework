@@ -1,16 +1,6 @@
 {
   "contents": [
     {
-      "id": 1,
-      "title": "dB에서 내려준 데이터 제목1",
-      "body": "dB에서 내려준 데이터 본문1."
-    },
-    {
-      "id": 2,
-      "title": "dB에서 내려준 데이터 제목2",
-      "body": "dB에서 내려준 데이터 본문2."
-    },
-    {
       "title": "ㅁㅁ",
       "body": "ㅁㅁ",
       "id": "BALhWxY8z"
@@ -24,6 +14,11 @@
       "title": "ㅃ",
       "body": "ㅃ",
       "id": "fYl6KU1D7"
+    },
+    {
+      "title": "aa",
+      "body": "aa",
+      "id": "A8q2FmIeP"
     }
   ]
 }
