@@ -12,7 +12,6 @@ const Detail_Content = () => {
   const [editMode, setEditMode] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
-  const [showUpdatedContent, setShowUpdatedContent] = useState(false);
 
   //hooks
   const { contentId } = useParams();
@@ -74,23 +73,7 @@ const Detail_Content = () => {
                   setNewBody(e.target.value);
                 }}
               />
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-
-                  const editedContent = {
-                    newTitle,
-                    newBody,
-                    id: contentId,
-                  };
-
-                  dispatch(editContent(editedContent));
-                  setShowUpdatedContent(true);
-                  // navigate("/");
-                }}
-              >
-                수정 완료
-              </button>
+              <button>수정 완료</button>
             </form>
           </>
         ) : null}
