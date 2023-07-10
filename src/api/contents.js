@@ -46,4 +46,17 @@ const deleteContent = async (targetContentId) => {
   }
 };
 
-export { getContents, addContent, deleteContent };
+//4. 데이터 수정
+const editContent = async (editedContent) => {
+  try {
+    await axios.patch(
+      `${process.env.REACT_APP_SERVER_URL}/contents/${editedContent.id}`,
+      editedContent
+    );
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export { getContents, addContent, deleteContent, editContent };

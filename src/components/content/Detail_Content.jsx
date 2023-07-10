@@ -1,9 +1,8 @@
-import { deleteContent, getContents } from "api/contents";
+import { deleteContent, getContents, editContent } from "api/contents";
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { editContent } from "redux/modules/contentsSlice";
 import shortid from "shortid";
 
 const Detail_Content = () => {
@@ -30,6 +29,14 @@ const Detail_Content = () => {
     },
   });
 
+  //UPDATE
+  const updateMutation = useMutation(editContent, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("contents");
+      console.log("UPDATE 성공하였습니다😀");
+    },
+  });
+
   //GET
   const { isLoading, isError, data } = useQuery("contents", getContents); //첫번째인자인 key값이 중요 (나중에 invalidate할 때 쓰임), 두번째 인자는 비동기함수
 
@@ -45,9 +52,25 @@ const Detail_Content = () => {
   console.log("콘솔1", targetContent);
 
   //❸게시글 Update
-  const editHandler = (targetContentId) => {
+  const editModeHandler = (targetContentId) => {
     //
     setEditMode((prev) => !prev);
+  };
+  const onSubmitEditHandler = (e) => {
+    //
+    e.preventDefault();
+    //
+    const editedContent = {
+      title: newTitle,
+      body: newBody,
+      id: contentId,
+      isModified: true,
+    };
+    //
+    // dispatch(editContent(editedContent));
+    updateMutation.mutate(editedContent);
+    //다시 false로 바꾸기
+    setEditMode(false);
   };
 
   //❹게시글 Delete
@@ -63,23 +86,7 @@ const Detail_Content = () => {
       <div>
         {editMode ? (
           <>
-            <form
-              onSubmit={(e) => {
-                //
-                e.preventDefault();
-                //
-                const editedContent = {
-                  title: newTitle,
-                  body: newBody,
-                  id: contentId,
-                  isModified: true,
-                };
-                //
-                dispatch(editContent(editedContent));
-                //다시 false로 바꾸기
-                setEditMode(false);
-              }}
-            >
+            <form onSubmit={onSubmitEditHandler}>
               <input
                 type="text"
                 value={newTitle}
@@ -120,7 +127,7 @@ const Detail_Content = () => {
               : targetContent?.body}
           </li>
           <div>
-            <button onClick={() => editHandler(targetContent?.id)}>
+            <button onClick={() => editModeHandler(targetContent?.id)}>
               수정하기
             </button>
             <button onClick={() => deleteHandler(targetContent?.id)}>
