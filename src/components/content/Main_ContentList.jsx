@@ -19,7 +19,7 @@ const Main_ContentList = () => {
     return <h1>로딩중입니다🥲</h1>;
   }
   if (isError) {
-    return <h1>에러입니다🥲</h1>;
+    return <h1>에러가 발생했습니다🥲</h1>;
   }
 
   //Event Handler
@@ -30,7 +30,7 @@ const Main_ContentList = () => {
   return (
     <>
       {/* 메인페이지 랜더링부분 */}
-      {/* {contents?.map((content) => {
+      {contents?.map((content) => {
         return (
           <div
             key={content.id}
@@ -52,41 +52,10 @@ const Main_ContentList = () => {
                   게시글 상세보기
                 </button>
               </ul>
-            </div> */}
-
-      {/* --------------------------------------------------- */}
-
-      {/* 추후 삭제하기 */}
-      {/* <div>
-              {content.newTitle && content.newBody ? (
-                <div className="editedContent">
-                  <ul>
-                    <li>
-                      {content.newTitle}
-                      {content.newBody}
-                    </li>
-                    <button onClick={() => onContentClick(content.id)}>
-                      게시글 상세보기
-                    </button>
-                  </ul>
-                </div>
-              ) : (
-                <div className="previousContent">
-                  <ul>
-                    <li>
-                      {content.title}
-                      {content.body}
-                    </li>
-                    <button onClick={() => onContentClick(content.id)}>
-                      게시글 상세보기
-                    </button>
-                  </ul>
-                </div>
-              )}
-            </div> */}
-      {/* </div>
+            </div>
+          </div>
         );
-      })} */}
+      })}
     </>
   );
 };
