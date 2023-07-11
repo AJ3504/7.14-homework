@@ -22,8 +22,9 @@ const Detail_Content = () => {
   //UseStates
   const [editMode, setEditMode] = useState(false);
   //custom hook
-  const [newTitle, onChangeNewTitleHandler, resetNewTitle] = useInput();
-  const [newBody, onChangeNewBodyHandler, resetNewBody] = useInput();
+  const [newTitle, onChangeNewTitleHandler, resetNewTitle] =
+    useInput(prevTitle);
+  const [newBody, onChangeNewBodyHandler, resetNewBody] = useInput(prevBody);
 
   //react Query
   //DELETE

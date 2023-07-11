@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-const useInput = () => {
+const useInput = (initialValue = "") => {
   //state
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(initialValue);
 
   //hanlder
   const handler = (e) => {
