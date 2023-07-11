@@ -53,12 +53,25 @@ const Detail_Content = () => {
 
   //❸게시글 Update
   const editModeHandler = () => {
-    //
-    setEditMode((prev) => !prev);
+    const confirmed = window.confirm("정말 수정하시겠습니까?");
+    if (confirmed) {
+      //
+      setEditMode((prev) => !prev);
+    }
   };
   const onSubmitEditHandler = (e) => {
     //
     e.preventDefault();
+
+    //return 로직
+    if (!newTitle || !newBody) {
+      alert("제목과 본문을 모두 입력해주세요!");
+      return;
+    } else if (newTitle.length < 5 || newBody.length < 5) {
+      alert("제목과 본문을 5글자 이상 입력해주세요!");
+      return;
+    }
+
     //
     const editedContent = {
       title: newTitle,
@@ -75,9 +88,12 @@ const Detail_Content = () => {
 
   //❹게시글 Delete
   const deleteHandler = (targetContentId) => {
-    // dispatch(deleteContent(targetContentId));
-    deleteMutation.mutate(targetContentId);
-    navigate("/");
+    const confirmed = window.confirm("정말 삭제하시겠습니까?");
+    if (confirmed) {
+      // dispatch(deleteContent(targetContentId));
+      deleteMutation.mutate(targetContentId);
+      navigate("/");
+    }
   };
 
   return (
@@ -122,6 +138,7 @@ const Detail_Content = () => {
             {targetContent?.newTitle
               ? targetContent?.newTitle
               : targetContent?.title}
+            <br />
             {targetContent?.newBody
               ? targetContent?.newBody
               : targetContent?.body}

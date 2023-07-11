@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useInput from "hooks/useInput";
 import { useDispatch } from "react-redux";
 // import { addContent } from "redux/modules/contentsSlice";
 import { addContent } from "api/contents";
@@ -18,9 +19,12 @@ const Main_ModalForm = () => {
     },
   });
 
+  //custom hook
+  const [title, onChangeTitleHandler, resetTitle] = useInput();
+  const [body, onChangeBodyHandler, resetBody] = useInput();
+
   //UseStates
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   //기타
@@ -52,6 +56,9 @@ const Main_ModalForm = () => {
     if (!title || !body) {
       alert("제목과 본문을 모두 입력해주세요!");
       return;
+    } else if (title.length < 5 || body.length < 5) {
+      alert("제목과 본문을 5글자 이상 입력해주세요!");
+      return;
     }
 
     const newContent = {
@@ -63,8 +70,8 @@ const Main_ModalForm = () => {
     // dispatch(addContent(newContent));
     mutation.mutate(newContent);
 
-    setTitle("");
-    setBody("");
+    resetTitle("");
+    resetBody("");
   };
 
   return (
@@ -100,22 +107,8 @@ const Main_ModalForm = () => {
             {/*  */}
             작성자 아이디 <input />
             게시글 제목
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => {
-                e.preventDefault();
-                setTitle(e.target.value);
-              }}
-            />
-            <textarea
-              type="text"
-              value={body}
-              onChange={(e) => {
-                e.preventDefault();
-                setBody(e.target.value);
-              }}
-            />
+            <input type="text" value={title} onChange={onChangeTitleHandler} />
+            <textarea type="text" value={body} onChange={onChangeBodyHandler} />
             <button>게시글 등록하기</button>
             <button onClick={closeModal}>창닫기</button>
           </form>
