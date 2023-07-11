@@ -58,7 +58,6 @@ const Main_ContentList = () => {
                 <button onClick={() => onContentClick(content)}>
                   게시글 상세보기
                 </button>
-                {/* <Link to={`/${content}`}>상세보기</Link>   */}
               </ul>
             </div>
           </div>

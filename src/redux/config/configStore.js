@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import contentsSlice from "redux/modules/contentsSlice";
+import userSlice from "redux/modules/userSlice";
 
 //ASIS
 // const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ import contentsSlice from "redux/modules/contentsSlice";
 const store = configureStore({
   reducer: {
     contentsSlice: contentsSlice,
+    userSlice: userSlice,
   },
 });
 

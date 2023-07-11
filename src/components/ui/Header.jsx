@@ -1,3 +1,5 @@
+import Login from "components/authentication/Login";
+import Signup from "components/authentication/Signup";
 import React, { useState } from "react";
 
 function Header() {
@@ -47,11 +49,17 @@ function Header() {
           </button>
         </div>
 
-        <div style={{ height: "40%", marginTop: "20px" }}>
+        {/* <div style={{ height: "40%", marginTop: "20px" }}>
           <button type="submit" style={{ height: "100%" }}>
             로그인
           </button>
-        </div>
+        </div> */}
+
+        {/* 로그인 */}
+        <Login />
+
+        {/* 회원가입 */}
+        <Signup />
       </div>
 
       {/* 헤더2 */}

@@ -1,60 +1,6 @@
 클릭한 바로 그 게시글 = targetContent
+json-server --watch db.json --port 4000
 
-{/* 메인페이지 랜더링부분 */}
-      {/* {contents?.map((content) => {
-        return (
-          <div
-            key={content.id}
-            style={{
-              border: "solid",
-              margin: "10px",
-              padding: "10px",
-              fontWeight: "bold",
-            }}
-          >
-            <div className="editedContent">
-              <ul>
-                <li>
-                  {content?.newTitle ? content?.newTitle : content?.title}
-                  <br />
-                  {content?.newBody ? content?.newBody : content?.body}
-                </li>
-                <button onClick={() => onContentClick(content.id)}>
-                  게시글 상세보기
-                </button>
-              </ul>
-            </div> */}
-
-      {/* --------------------------------------------------- */}
-
-      {/* 추후 삭제하기 */}
-      {/* <div>
-              {content.newTitle && content.newBody ? (
-                <div className="editedContent">
-                  <ul>
-                    <li>
-                      {content.newTitle}
-                      {content.newBody}
-                    </li>
-                    <button onClick={() => onContentClick(content.id)}>
-                      게시글 상세보기
-                    </button>
-                  </ul>
-                </div>
-              ) : (
-                <div className="previousContent">
-                  <ul>
-                    <li>
-                      {content.title}
-                      {content.body}
-                    </li>
-                    <button onClick={() => onContentClick(content.id)}>
-                      게시글 상세보기
-                    </button>
-                  </ul>
-                </div>
-              )}
-            </div> */}
-      {/* </div>
-        );
-      })} */}
+<로그인>
+1. loginUser가 true면 모달창 뜨고 <-> false면 1.alert창 뜨고 2.로그인모달 띄워주고
+2. email/pw 존재하는지 검증한 후 -> 존재시 isLogin을 true로 바꿔줌

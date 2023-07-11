@@ -1,3 +1,4 @@
+import Login from "components/authentication/Login";
 import Footer from "components/ui/Footer";
 import Header from "components/ui/Header";
 import Detail from "pages/Detail";
@@ -13,6 +14,7 @@ const Router = () => {
 
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/detail/:contentId" element={<Detail />} />
       </Routes>
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useInput from "hooks/useInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { addContent } from "redux/modules/contentsSlice";
 import { addContent } from "api/contents";
 import shortid from "shortid";
@@ -26,6 +26,11 @@ const Main_ModalForm = () => {
   const [title, onChangeTitleHandler, resetTitle] = useInput();
   const [body, onChangeBodyHandler, resetBody] = useInput();
 
+  //UseSelector
+  const userList = useSelector((state) => state.userSlice);
+  const loginUser = userList.find((user) => user.isLogin === true);
+  // console.log("loginUser 테스트>", loginUser);
+
   //기타
   const options = ["엔터테인먼트/예술", "책", "데이트코스 추천"];
 
@@ -34,8 +39,13 @@ const Main_ModalForm = () => {
 
   //Event Handler
   //모달
-  const openModal = () => {
-    setIsOpen(true);
+  const openContentModal = () => {
+    if (loginUser) {
+      setIsOpen(true);
+    } else {
+      alert("로그인 먼저 해주세요!");
+      return;
+    }
   };
   const closeModal = () => {
     setIsOpen(false);
@@ -78,7 +88,7 @@ const Main_ModalForm = () => {
 
   return (
     <div>
-      <button onClick={openModal}>게시글 쓰기</button>
+      <button onClick={openContentModal}>게시글 쓰기</button>
 
       {isOpen && (
         <div>
@@ -110,9 +120,12 @@ const Main_ModalForm = () => {
             작성자 아이디 <input />
             게시글 제목
             <input type="text" value={title} onChange={onChangeTitleHandler} />
+            <br />
+            게시글 내용
             <textarea type="text" value={body} onChange={onChangeBodyHandler} />
+            <br />
             <button disabled={isDisabled}>게시글 등록하기</button>
-            <button onClick={closeModal}>창닫기</button>
+            <button onClick={closeModal}>창닫기☒</button>
           </form>
         </div>
       )}
