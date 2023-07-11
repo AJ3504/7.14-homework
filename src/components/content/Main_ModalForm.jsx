@@ -19,14 +19,13 @@ const Main_ModalForm = () => {
     },
   });
 
+  //UseStates
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
   //custom hook
   const [title, onChangeTitleHandler, resetTitle] = useInput();
   const [body, onChangeBodyHandler, resetBody] = useInput();
 
-  //UseStates
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
   //기타
   const options = ["엔터테인먼트/예술", "책", "데이트코스 추천"];
 

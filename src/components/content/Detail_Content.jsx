@@ -1,4 +1,5 @@
 import { deleteContent, getContents, editContent } from "api/contents";
+import useInput from "hooks/useInput";
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +12,9 @@ const Detail_Content = () => {
 
   //UseStates
   const [editMode, setEditMode] = useState(false);
-  const [newTitle, setNewTitle] = useState("");
-  const [newBody, setNewBody] = useState("");
+  //custom hook
+  const [newTitle, onChangeNewTitleHandler, resetNewTitle] = useInput();
+  const [newBody, onChangeNewBodyHandler, resetNewBody] = useInput();
 
   //hooks
   const { contentId } = useParams();
@@ -82,6 +84,10 @@ const Detail_Content = () => {
     //
     // dispatch(editContent(editedContent));
     updateMutation.mutate(editedContent);
+
+    resetNewTitle("");
+    resetNewBody("");
+
     //다시 false로 바꾸기
     setEditMode(false);
   };
@@ -109,18 +115,12 @@ const Detail_Content = () => {
               <input
                 type="text"
                 value={newTitle}
-                onChange={(e) => {
-                  e.preventDefault();
-                  setNewTitle(e.target.value);
-                }}
+                onChange={onChangeNewTitleHandler}
               />
               <input
                 type="text"
                 value={newBody}
-                onChange={(e) => {
-                  e.preventDefault();
-                  setNewBody(e.target.value);
-                }}
+                onChange={onChangeNewBodyHandler}
               />
               <button disabled={isDisabled}>수정 완료</button>
             </form>
