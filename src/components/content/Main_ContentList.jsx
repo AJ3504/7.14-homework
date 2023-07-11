@@ -23,8 +23,14 @@ const Main_ContentList = () => {
   }
 
   //Event Handler
-  const onContentClick = (contentId) => {
-    navigate(`/detail/${contentId}`);
+  const onContentClick = (content) => {
+    navigate(`/detail/${content.id}`, {
+      state: {
+        prevTitle: content.title,
+        prevBody: content.body,
+        contentId: content.id,
+      },
+    });
   };
 
   return (
@@ -49,9 +55,10 @@ const Main_ContentList = () => {
                   <br />
                   {content?.newBody ? content?.newBody : content?.body}
                 </li>
-                <button onClick={() => onContentClick(content.id)}>
+                <button onClick={() => onContentClick(content)}>
                   게시글 상세보기
                 </button>
+                {/* <Link to={`/${content}`}>상세보기</Link>   */}
               </ul>
             </div>
           </div>

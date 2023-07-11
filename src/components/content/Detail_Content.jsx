@@ -3,23 +3,27 @@ import useInput from "hooks/useInput";
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import shortid from "shortid";
 
 const Detail_Content = () => {
   //UseSelectors
   // const contents = useSelector((state) => state.contentsSlice);
 
+  //hooks
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log("콘솔4", location.state);
+
+  const prevTitle = location.state.prevTitle;
+  const prevBody = location.state.prevBody;
+  const contentId = location.state.contentId;
+
   //UseStates
   const [editMode, setEditMode] = useState(false);
   //custom hook
   const [newTitle, onChangeNewTitleHandler, resetNewTitle] = useInput();
   const [newBody, onChangeNewBodyHandler, resetNewBody] = useInput();
-
-  //hooks
-  const { contentId } = useParams();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   //react Query
   //DELETE
@@ -38,20 +42,6 @@ const Detail_Content = () => {
       console.log("UPDATE 성공하였습니다😀");
     },
   });
-
-  //GET
-  const { isLoading, isError, data } = useQuery("contents", getContents); //첫번째인자인 key값이 중요 (나중에 invalidate할 때 쓰임), 두번째 인자는 비동기함수
-
-  if (isLoading) {
-    return <h1>로딩중입니다🥲</h1>;
-  }
-  if (isError) {
-    return <h1>에러가 발생했습니다🥲</h1>;
-  }
-
-  //기타
-  const targetContent = data.find((item) => item.id === contentId);
-  console.log("콘솔1", targetContent);
 
   //❸게시글 Update
   const editModeHandler = () => {
@@ -138,19 +128,13 @@ const Detail_Content = () => {
           }}
         >
           <li>
-            {targetContent?.newTitle
-              ? targetContent?.newTitle
-              : targetContent?.title}
+            {prevTitle}
             <br />
-            {targetContent?.newBody
-              ? targetContent?.newBody
-              : targetContent?.body}
+            {prevBody}
           </li>
           <div>
             <button onClick={editModeHandler}>수정하기</button>
-            <button onClick={() => deleteHandler(targetContent?.id)}>
-              삭제하기
-            </button>
+            <button onClick={() => deleteHandler(contentId)}>삭제하기</button>
             <button onClick={() => navigate("/")}>이전 화면으로</button>
           </div>
         </ul>
