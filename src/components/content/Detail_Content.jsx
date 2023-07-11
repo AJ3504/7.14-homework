@@ -44,6 +44,20 @@ const Detail_Content = () => {
     },
   });
 
+  //GET
+  const { isLoading, isError, data } = useQuery("contents", getContents); //첫번째인자인 key값이 중요 (나중에 invalidate할 때 쓰임), 두번째 인자는 비동기함수
+
+  if (isLoading) {
+    return <h1>로딩중입니다🥲</h1>;
+  }
+  if (isError) {
+    return <h1>에러가 발생했습니다🥲</h1>;
+  }
+
+  //기타
+  const targetContent = data.find((item) => item.id === contentId);
+  console.log("콘솔1", targetContent);
+
   //❸게시글 Update
   const editModeHandler = () => {
     const confirmed = window.confirm("정말 수정하시겠습니까?");
@@ -129,9 +143,10 @@ const Detail_Content = () => {
           }}
         >
           <li>
-            {prevTitle}
+            {targetContent?.title}
+
             <br />
-            {prevBody}
+            {targetContent?.body}
           </li>
           <div>
             <button onClick={editModeHandler}>수정하기</button>
