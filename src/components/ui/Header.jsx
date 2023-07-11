@@ -49,12 +49,6 @@ function Header() {
           </button>
         </div>
 
-        {/* <div style={{ height: "40%", marginTop: "20px" }}>
-          <button type="submit" style={{ height: "100%" }}>
-            로그인
-          </button>
-        </div> */}
-
         {/* 로그인 */}
         <Login />
 

@@ -12,8 +12,8 @@ function Login() {
   //UseSelector
   const userList = useSelector((state) => state.userSlice);
   const loginUser = userList.find((user) => user.isLogin === true);
-  console.log("userList테스트>", userList);
-  console.log("loginUser 테스트2>", loginUser);
+  // console.log("userList테스트>", userList);
+  // console.log("loginUser 테스트2>", loginUser);
 
   //hooks
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function Login() {
       return;
     }
   };
-  const closeModal = () => {
+  const closeLoginModal = () => {
     setIsOpen(false);
   };
 
@@ -69,10 +69,6 @@ function Login() {
                   e.preventDefault();
 
                   //
-                  alert(email);
-                  alert(pw);
-
-                  //
                   dispatch(
                     login({
                       pw,
@@ -80,17 +76,14 @@ function Login() {
                     })
                   );
 
-                  console.log("테스트중>", email, pw);
-
-                  //
-                  // navigate("/");
+                  alert("로그인 완료!");
                 }}
               >
                 로그인👆
               </button>
             </form>
 
-            <button onClick={closeModal}>창닫기☒</button>
+            <button onClick={closeLoginModal}>창닫기☒</button>
           </div>
         )}
       </div>
