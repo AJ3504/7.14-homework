@@ -86,6 +86,9 @@ const Detail_Content = () => {
     setEditMode(false);
   };
 
+  // 입력 필드가 모두 비어 있는 경우 버튼 비활성화
+  const isDisabled = !newTitle || !newBody;
+
   //❹게시글 Delete
   const deleteHandler = (targetContentId) => {
     const confirmed = window.confirm("정말 삭제하시겠습니까?");
@@ -119,7 +122,7 @@ const Detail_Content = () => {
                   setNewBody(e.target.value);
                 }}
               />
-              <button>수정 완료</button>
+              <button disabled={isDisabled}>수정 완료</button>
             </form>
           </>
         ) : null}

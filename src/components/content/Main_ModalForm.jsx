@@ -74,6 +74,9 @@ const Main_ModalForm = () => {
     resetBody("");
   };
 
+  // 입력 필드가 모두 비어 있는 경우 버튼 비활성화
+  const isDisabled = !title || !body;
+
   return (
     <div>
       <button onClick={openModal}>게시글 쓰기</button>
@@ -109,7 +112,7 @@ const Main_ModalForm = () => {
             게시글 제목
             <input type="text" value={title} onChange={onChangeTitleHandler} />
             <textarea type="text" value={body} onChange={onChangeBodyHandler} />
-            <button>게시글 등록하기</button>
+            <button disabled={isDisabled}>게시글 등록하기</button>
             <button onClick={closeModal}>창닫기</button>
           </form>
         </div>
