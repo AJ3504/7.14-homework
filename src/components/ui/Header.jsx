@@ -1,10 +1,18 @@
 import Login from "components/authentication/Login";
+import Logout from "components/authentication/Logout";
 import Signup from "components/authentication/Signup";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Header() {
   //useStates
   const [searchText, setSearchText] = useState("");
+
+  //UseSelector
+  const userList = useSelector((state) => state.userSlice);
+  const loginUser = userList.find((user) => user.isLogin === true);
+  console.log("userList테스트5>", userList);
+  console.log("loginUser 테스트6>", loginUser);
 
   return (
     <>
@@ -49,11 +57,26 @@ function Header() {
           </button>
         </div>
 
-        {/* 로그인 */}
-        <Login />
+        <div id="authentication" style={{ display: "flex" }}>
+          {/* 로그인, 회원가입 */}
+          <Login />
+          <Signup />
 
-        {/* 회원가입 */}
-        <Signup />
+          {/* 로그인 했을 때만 보이게끔 */}
+          {loginUser ? (
+            <div>
+              {loginUser.userName}님 반갑습니다!
+              <Logout />
+            </div>
+          ) : (
+            ""
+          )}
+
+          {/* 로그아웃 */}
+          {/* <div>
+            <Logout />
+          </div> */}
+        </div>
       </div>
 
       {/* 헤더2 */}

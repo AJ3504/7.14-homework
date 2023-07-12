@@ -8,7 +8,7 @@ const userSlice = createSlice({
     {
       id: shortid.generate(),
       pw: "test",
-      email: "test@gmial.com",
+      email: "test@gmail.com",
       userName: "이안진",
       isLogin: false, //true로 지정하면 콘솔 뜨고, false로 지정하면 undefined 뜸
     },
@@ -49,8 +49,16 @@ const userSlice = createSlice({
 
       state.push(newUser);
     },
+
+    logout: (state, action) => {
+      //isLogin을 false로 만들어주는 작업 필요 : map으로 하나하나 돌면서, 걸리면 isLogin을 false로 바꿔줌
+      //action.payload에는, 로그인유저의 shortId가 담겨있음
+      return state.map((user) => {
+        return { ...user, isLogin: false };
+      });
+    },
   },
 });
 
-export const { login, join } = userSlice.actions;
+export const { login, join, logout } = userSlice.actions;
 export default userSlice.reducer;

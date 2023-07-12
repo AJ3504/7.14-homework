@@ -13,8 +13,8 @@ const Signup = () => {
   //UseSelector
   const userList = useSelector((state) => state.userSlice);
   const loginUser = userList.find((user) => user.isLogin === true);
-  console.log("userList테스트3>", userList);
-  console.log("loginUser 테스트4>", loginUser);
+  // console.log("userList테스트3>", userList);
+  // console.log("loginUser 테스트4>", loginUser);
 
   //hooks
   const dispatch = useDispatch();
