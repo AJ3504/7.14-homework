@@ -20,17 +20,17 @@ const userSlice = createSlice({
       console.log(state);
 
       return state.map((user) => {
-        console.log(action.payload.email); //이렇게 action.payload로 하면 콘솔에 로그인값이 찍히는데,
-        console.log(action.payload.pw);
-        console.log(user.email); //user으로 하면 로그인값 안찍히는걸로 봐선
-        console.log(user.pw);
+        // console.log(action.payload.email); //이렇게 action.payload로 하면 콘솔에 로그인값이 찍히는데,
+        // console.log(action.payload.pw);
+        // console.log(user.email); //user으로 하면 로그인값 안찍히는걸로 봐선
+        // console.log(user.pw);
 
         if (
           user.email === action.payload.email &&
           user.pw === action.payload.pw
         ) {
-          console.log("제발>", user.email); //user으로 하면 로그인값 안찍히는걸로 봐선
-          console.log("제발2>", user.pw);
+          // console.log("제발>", user.email); //user으로 하면 로그인값 안찍히는걸로 봐선
+          // console.log("제발2>", user.pw);
           return { ...user, isLogin: !user.isLogin };
         } else {
           return user;
@@ -54,7 +54,7 @@ const userSlice = createSlice({
       //isLogin을 false로 만들어주는 작업 필요 : map으로 하나하나 돌면서, 걸리면 isLogin을 false로 바꿔줌
       //action.payload에는, 로그인유저의 shortId가 담겨있음
       return state.map((user) => {
-        return { ...user, isLogin: false };
+        return { ...user, isLogin: false }; //!isLogin도 당연히 가능
       });
     },
   },

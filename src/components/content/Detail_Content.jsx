@@ -8,7 +8,9 @@ import shortid from "shortid";
 
 const Detail_Content = () => {
   //UseSelectors
-  // const contents = useSelector((state) => state.contentsSlice);
+
+  const userList = useSelector((state) => state.userSlice);
+  const loginUser = userList.find((user) => user.isLogin === true);
 
   //hooks
   const navigate = useNavigate();
@@ -18,6 +20,8 @@ const Detail_Content = () => {
   const prevTitle = location.state.prevTitle;
   const prevBody = location.state.prevBody;
   const contentId = location.state.contentId;
+  const prevWriterId = location.state.prevWriterId;
+  const prevWriterName = location.state.prevWriterName;
 
   //UseStates
   const [editMode, setEditMode] = useState(false);
@@ -60,6 +64,11 @@ const Detail_Content = () => {
 
   //❸게시글 Update
   const editModeHandler = () => {
+    if (!loginUser) {
+      alert("로그인 먼저 해주세요!");
+      return;
+    }
+
     const confirmed = window.confirm("정말 수정하시겠습니까?");
     if (confirmed) {
       //
@@ -102,6 +111,11 @@ const Detail_Content = () => {
 
   //❹게시글 Delete
   const deleteHandler = (targetContentId) => {
+    if (!loginUser) {
+      alert("로그인 먼저 해주세요!");
+      return;
+    }
+
     const confirmed = window.confirm("정말 삭제하시겠습니까?");
     if (confirmed) {
       // dispatch(deleteContent(targetContentId));

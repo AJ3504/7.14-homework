@@ -4,3 +4,8 @@ json-server --watch db.json --port 4000
 <로그인>
 1. loginUser가 true면 모달창 뜨고 <-> false면 1.alert창 뜨고 2.로그인모달 띄워주고
 2. email/pw 존재하는지 검증한 후 -> 존재시 isLogin을 true로 바꿔줌
+
+const userList = useSelector((state) => state.userSlice);
+const loginUser = userList.find((user) => user.isLogin === true);
+📌userList가 state
+📌loginUser가 로그인한 사람 (isLogin이 true인 사람)

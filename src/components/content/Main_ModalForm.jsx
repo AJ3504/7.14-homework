@@ -29,7 +29,7 @@ const Main_ModalForm = () => {
   //UseSelector
   const userList = useSelector((state) => state.userSlice);
   const loginUser = userList.find((user) => user.isLogin === true);
-  // console.log("loginUser 테스트>", loginUser);
+  console.log("loginUser 테스트>", loginUser);
 
   //기타
   const options = ["엔터테인먼트/예술", "책", "데이트코스 추천"];
@@ -71,9 +71,13 @@ const Main_ModalForm = () => {
     }
 
     const newContent = {
+      //게시글정보
       title,
       body,
       id: shortid.generate(),
+      //유저정보
+      writerId: loginUser.id,
+      writerName: loginUser.userName,
     };
 
     // dispatch(addContent(newContent));
@@ -117,7 +121,6 @@ const Main_ModalForm = () => {
               </div>
             )}
             {/*  */}
-            작성자 아이디 <input />
             게시글 제목
             <input type="text" value={title} onChange={onChangeTitleHandler} />
             <br />

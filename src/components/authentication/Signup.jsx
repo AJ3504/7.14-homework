@@ -73,7 +73,7 @@ const Signup = () => {
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="닉네임을 입력해주세요."
+                placeholder="이름을 입력해주세요."
               />
               <br />
               <button
@@ -88,12 +88,6 @@ const Signup = () => {
                   }
 
                   //
-                  alert(email);
-                  alert(pw);
-                  alert(confPw);
-                  alert(name);
-
-                  //
                   dispatch(
                     join({
                       pw,
@@ -102,7 +96,7 @@ const Signup = () => {
                     })
                   );
 
-                  alert("회원가입 완료!");
+                  alert(`${name}님 회원가입 완료!`);
                 }}
               >
                 회원가입👆

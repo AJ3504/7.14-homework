@@ -29,6 +29,8 @@ const Main_ContentList = () => {
         prevTitle: content.title,
         prevBody: content.body,
         contentId: content.id,
+        prevWriterId: content.writerId,
+        prevWriterName: content.writerName,
       },
     });
   };

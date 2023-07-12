@@ -23,7 +23,7 @@ function Logout() {
           onClick={() => {
             const isConfirmed = window.confirm("로그아웃하시겠습니까?");
             if (isConfirmed) {
-              dispatch(logout(loginUser.id));
+              dispatch(logout(loginUser.id)); //action.payload로, 로그인유저의 shortid를 넘겨주어야함
             }
           }}
         >
