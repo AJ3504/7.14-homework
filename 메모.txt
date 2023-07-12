@@ -9,3 +9,22 @@ const userList = useSelector((state) => state.userSlice);
 const loginUser = userList.find((user) => user.isLogin === true);
 📌userList가 state
 📌loginUser가 로그인한 사람 (isLogin이 true인 사람)
+
+------------
+<mock server>
+{
+  "email" : "test@gmail.com",
+  "id" : "zBnpNCZyc",
+  "isLogin" : true,
+  "pw" : "test",
+  "userName" : "이안진"
+}
+
+{
+  "id": "string",
+  "password": "string"
+}
+--------------------------------------
+1. 회원가입
+2. 로그인 (이때 토큰을 받는데, 쿠키/로컬스토리지에 저장해두기)
+3. 담아둔 토큰을 탑재해서 보냄 (https://velog.io/@ch9eri/Axios-headers-Authorization)

@@ -1,8 +1,21 @@
+import { addSignupUser } from "api/users";
 import React, { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { join } from "redux/modules/userSlice";
 
 const Signup = () => {
+  //react Query
+  const queryClient = useQueryClient();
+  //새로고침 없이 바로 업데이트되는 로직
+  const signupMutation = useMutation(addSignupUser, {
+    //변경이 일어난 경우, 갱신해줘야 하는 데이터 없는지 생각 -> 있다면, 해당 쿼리 key를 invalidate
+    onSuccess: () => {
+      queryClient.invalidateQueries("register");
+      console.log("회원가입 POST 성공하였습니다😀");
+    },
+  });
+
   //UseState
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -87,14 +100,13 @@ const Signup = () => {
                     return false;
                   }
 
+                  const newUser = {
+                    id: email,
+                    password: pw,
+                  };
+
                   //
-                  dispatch(
-                    join({
-                      pw,
-                      email,
-                      name,
-                    })
-                  );
+                  signupMutation.mutate(newUser);
 
                   alert(`${name}님 회원가입 완료!`);
                 }}

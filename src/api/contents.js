@@ -18,10 +18,6 @@ const getContents = async () => {
 };
 
 //2. 데이터 추가
-// const addContent = async (newContent) => {
-//   console.log("콘솔3", response.data)
-// };
-
 const addContent = async (newContent) => {
   try {
     await axios.post(
