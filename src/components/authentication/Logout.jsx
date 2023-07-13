@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "redux/modules/userSlice";
 
@@ -10,7 +11,22 @@ function Logout() {
   //hooks
   const dispatch = useDispatch();
 
+  //
+  const accessToken = localStorage.getItem("accessToken");
+  const isDisabled = !accessToken;
+
   //Event Handler
+  const onClickLogoutHandler = async (e) => {
+    //
+    e.preventDefault();
+    const isConfirmed = window.confirm("로그아웃하시겠습니까?");
+    if (isConfirmed) {
+      localStorage.removeItem("accessToken");
+      //
+      // dispatch(logout(loginUser.email));
+      alert("로그아웃되었습니다!");
+    }
+  };
 
   return (
     <>
@@ -18,12 +34,8 @@ function Logout() {
         <button
           type="submit"
           style={{ height: "100%" }}
-          onClick={() => {
-            const isConfirmed = window.confirm("로그아웃하시겠습니까?");
-            if (isConfirmed) {
-              dispatch(logout(loginUser.id)); //action.payload로, 로그인유저의 shortid를 넘겨주어야함
-            }
-          }}
+          onClick={onClickLogoutHandler}
+          // disabled={isDisabled}
         >
           로그아웃👆
         </button>

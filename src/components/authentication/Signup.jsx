@@ -1,4 +1,5 @@
 import { addSignupUser } from "api/users";
+import { response } from "msw";
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,12 +8,24 @@ import { join } from "redux/modules/userSlice";
 const Signup = () => {
   //react Query
   const queryClient = useQueryClient();
-  //새로고침 없이 바로 업데이트되는 로직
   const signupMutation = useMutation(addSignupUser, {
-    //변경이 일어난 경우, 갱신해줘야 하는 데이터 없는지 생각 -> 있다면, 해당 쿼리 key를 invalidate
     onSuccess: () => {
       queryClient.invalidateQueries("register");
       console.log("회원가입 POST 성공하였습니다😀");
+      alert("회원가입이 완료되었습니다!");
+    },
+    onError: (error) => {
+      if (
+        error.response.status === 401 &&
+        error.response.data.message === "이미 존재하는 유저 id입니다."
+      ) {
+        alert(error.response.data.message);
+      } else if (
+        error.response.status === 401 &&
+        error.response.data.message.includes("id 또는 password가")
+      ) {
+        alert(error.response.data.message);
+      }
     },
   });
 
@@ -26,15 +39,17 @@ const Signup = () => {
   //UseSelector
   const userList = useSelector((state) => state.userSlice);
   const loginUser = userList.find((user) => user.isLogin === true);
-  // console.log("userList테스트3>", userList);
-  // console.log("loginUser 테스트4>", loginUser);
 
   //hooks
   const dispatch = useDispatch();
 
+  //
+  const accessToken = localStorage.getItem("accessToken");
+  const isDisabled = !accessToken;
+
   //Event Handler
   const openSignupModal = () => {
-    if (!loginUser) {
+    if (!loginUser || !accessToken) {
       setIsOpen(true);
     } else {
       return;
@@ -51,6 +66,7 @@ const Signup = () => {
           type="submit"
           style={{ height: "100%" }}
           onClick={openSignupModal}
+          // disabled={isDisabled}
         >
           회원가입
         </button>
@@ -95,7 +111,17 @@ const Signup = () => {
                   e.preventDefault();
 
                   //return 로직
-                  if (pw !== confPw) {
+                  if (
+                    email === "" ||
+                    pw === "" ||
+                    confPw === "" ||
+                    name === ""
+                  ) {
+                    alert(
+                      "이메일, 비밀번호, 확인비밀번호, 이름을 모두 입력해주세요!"
+                    );
+                    return;
+                  } else if (pw !== confPw) {
                     alert("비밀번호가 다릅니다. 확인해주세요!");
                     return false;
                   }
@@ -105,12 +131,21 @@ const Signup = () => {
                     password: pw,
                   };
 
-                  // dispatch(join({ name }));
-
-                  //
                   signupMutation.mutate(newUser);
 
-                  alert(`${name}님 회원가입 완료!`);
+                  //
+                  // dispatch(
+                  //   join({
+                  //     pw,
+                  //     email,
+                  //     name,
+                  //   })
+                  // );
+
+                  setEmail("");
+                  setPw("");
+                  setConfPw("");
+                  setName("");
                 }}
               >
                 회원가입👆

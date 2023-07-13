@@ -33,6 +33,7 @@ const Main_ModalForm = () => {
 
   //기타
   const options = ["엔터테인먼트/예술", "책", "데이트코스 추천"];
+  const accessToken = localStorage.getItem("accessToken");
 
   //hooks
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const Main_ModalForm = () => {
   //Event Handler
   //모달
   const openContentModal = () => {
-    if (loginUser) {
+    if (accessToken || loginUser) {
       setIsOpen(true);
     } else {
       alert("로그인 먼저 해주세요!");

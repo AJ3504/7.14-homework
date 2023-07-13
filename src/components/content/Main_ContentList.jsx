@@ -1,5 +1,5 @@
 import { getContents } from "api/contents";
-import { signupUser } from "api/users";
+import { getVerifiedUserData, signupUser } from "api/users";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
@@ -11,7 +11,7 @@ const Main_ContentList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  //게시글 data, 유저 data
+  //게시글 data
   const { isLoading, isError, data } = useQuery("contents", getContents); //첫번째인자인 key값이 중요 (나중에 invalidate할 때 쓰임), 두번째 인자는 비동기함수
 
   if (isLoading) {

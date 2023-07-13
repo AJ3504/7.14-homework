@@ -58,24 +58,23 @@ function Header() {
         </div>
 
         <div id="authentication" style={{ display: "flex" }}>
-          {/* 로그인, 회원가입 */}
-          <Login />
-          <Signup />
-
-          {/* 로그인 했을 때만 보이게끔 */}
-          {loginUser ? (
+          {/* 로그인 했을 때 : 로그아웃 했을 때 */}
+          {/*localStorage.getItem("accessToken") ? (
             <div>
               {loginUser.userName}님 반갑습니다!
               <Logout />
             </div>
           ) : (
-            ""
-          )}
+            <div>
+              <Login />
+              <Signup />
+            </div>
+          )*/}
 
-          {/* 로그아웃 */}
-          {/* <div>
-            <Logout />
-          </div> */}
+          {/* 토큰 갱신 테스트용 */}
+          <Logout />
+          <Login />
+          <Signup />
         </div>
       </div>
 

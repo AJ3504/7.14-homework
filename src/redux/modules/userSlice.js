@@ -8,11 +8,12 @@ const userSlice = createSlice({
     {
       id: shortid.generate(),
       pw: "test",
-      email: "test@gmail.com",
+      email: "test@gmial.com",
       userName: "이안진",
       isLogin: false, //true로 지정하면 콘솔 뜨고, false로 지정하면 undefined 뜸
     },
   ],
+
   reducers: {
     //로그인 : 사용자가 입력한 email, id가 state 속 email, id와 같다면, isLogin 속성을 반대로 바꿔줌 (false -> true)
     login: (state, action) => {
@@ -32,15 +33,14 @@ const userSlice = createSlice({
     },
 
     join: (state, action) => {
-      const newUser = {
-        id: shortid.generate(),
+      const reduxNewUSer = {
         email: action.payload.email,
         pw: action.payload.pw,
         userName: action.payload.name,
         isLogin: false,
       };
 
-      state.push(newUser);
+      state.push(reduxNewUSer);
     },
 
     logout: (state, action) => {

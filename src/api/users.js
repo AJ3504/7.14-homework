@@ -45,7 +45,13 @@ const getVerifiedUserData = async () => {
     return response.data;
   } catch (error) {
     console.error(error);
-    throw error;
+    //에러 메세지
+    if (
+      error.response.status === 401 &&
+      error.response.data.message.includes("토큰이 만료되었습니다.")
+    ) {
+      alert("로그인이 만료되었습니다. 재로그인해주세요!");
+    }
   }
 };
 
