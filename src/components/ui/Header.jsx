@@ -1,7 +1,8 @@
+import { getVerifiedUserData } from "api/users";
 import Login from "components/authentication/Login";
 import Logout from "components/authentication/Logout";
 import Signup from "components/authentication/Signup";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 function Header() {
@@ -13,6 +14,14 @@ function Header() {
   const loginUser = userList.find((user) => user.isLogin === true);
   // console.log("userList테스트5>", userList);
   // console.log("loginUser 테스트6>", loginUser);
+
+  //
+  const accessToken = localStorage.getItem("accessToken");
+
+  //
+  useEffect(() => {
+    getVerifiedUserData();
+  }, [accessToken]);
 
   return (
     <>
@@ -59,9 +68,9 @@ function Header() {
 
         <div id="authentication" style={{ display: "flex" }}>
           {/* 로그인 했을 때 : 로그아웃 했을 때 */}
-          {/*localStorage.getItem("accessToken") ? (
+          {accessToken ? (
             <div>
-              {loginUser.userName}님 반갑습니다!
+              {/* {loginUser.userName}님 반갑습니다! */}
               <Logout />
             </div>
           ) : (
@@ -69,12 +78,11 @@ function Header() {
               <Login />
               <Signup />
             </div>
-          )*/}
-
+          )}
           {/* 토큰 갱신 테스트용 */}
-          <Logout />
+          {/* <Logout />
           <Login />
-          <Signup />
+          <Signup /> */}
         </div>
       </div>
 

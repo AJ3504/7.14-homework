@@ -30,6 +30,9 @@ const Detail_Content = () => {
     useInput(prevTitle);
   const [newBody, onChangeNewBodyHandler, resetNewBody] = useInput(prevBody);
 
+  //
+  const accessToken = localStorage.getItem("accessToken");
+
   //react Query
   //DELETE
   const queryClient = useQueryClient();
@@ -64,7 +67,7 @@ const Detail_Content = () => {
 
   //❸게시글 Update
   const editModeHandler = () => {
-    if (!loginUser) {
+    if (!accessToken) {
       alert("로그인 먼저 해주세요!");
       return;
     }
@@ -111,7 +114,7 @@ const Detail_Content = () => {
 
   //❹게시글 Delete
   const deleteHandler = (targetContentId) => {
-    if (!loginUser) {
+    if (!accessToken) {
       alert("로그인 먼저 해주세요!");
       return;
     }

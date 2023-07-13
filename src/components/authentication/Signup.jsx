@@ -45,15 +45,11 @@ const Signup = () => {
 
   //
   const accessToken = localStorage.getItem("accessToken");
-  const isDisabled = !accessToken;
+  const isDisabled = accessToken;
 
   //Event Handler
   const openSignupModal = () => {
-    if (!loginUser || !accessToken) {
-      setIsOpen(true);
-    } else {
-      return;
-    }
+    setIsOpen(true);
   };
   const closeSignupModal = () => {
     setIsOpen(false);

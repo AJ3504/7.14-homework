@@ -18,6 +18,10 @@ function Login() {
   //hooks
   const dispatch = useDispatch();
 
+  //
+  const accessToken = localStorage.getItem("accessToken");
+  const isDisabled = accessToken;
+
   //react Query
   // 유저 로그인
   const queryClient = useQueryClient();
@@ -50,15 +54,15 @@ function Login() {
   });
   //-------------------------------------------------------------------//
 
-  useEffect(() => {
-    getVerifiedUserData();
-  }, []);
+  // useEffect(() => {
+  //   getVerifiedUserData();
+  // }, [accessToken]);
 
   //-------------------------------------------------------------------//
 
   //Event Handler
   const openLoginModal = () => {
-    if (!loginUser) {
+    if (!accessToken) {
       setIsOpen(true);
     } else {
       return;
@@ -101,9 +105,6 @@ function Login() {
   const closeLoginModal = () => {
     setIsOpen(false);
   };
-
-  const accessToken = localStorage.getItem("accessToken");
-  const isDisabled = accessToken;
 
   return (
     <>

@@ -21,6 +21,7 @@ const Main_ModalForm = () => {
 
   //UseStates
   const [isOpen, setIsOpen] = useState(false);
+  const [selectAreaIsOpen, setSelectAreaIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   //custom hook
   const [title, onChangeTitleHandler, resetTitle] = useInput();
@@ -41,7 +42,7 @@ const Main_ModalForm = () => {
   //Event Handler
   //모달
   const openContentModal = () => {
-    if (accessToken || loginUser) {
+    if (accessToken) {
       setIsOpen(true);
     } else {
       alert("로그인 먼저 해주세요!");
@@ -54,8 +55,8 @@ const Main_ModalForm = () => {
 
   //select
   const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setIsOpen(false);
+    setSelectedOption(option); //해당 필드 클릭시, null->option값으로 바뀌고,
+    setSelectAreaIsOpen(false); //닫힘
   };
 
   //
@@ -77,8 +78,8 @@ const Main_ModalForm = () => {
       body,
       id: shortid.generate(),
       //유저정보
-      writerId: loginUser.id,
-      writerName: loginUser.userName,
+      // writerId: loginUser.id,
+      // writerName: loginUser.userName,
     };
 
     // dispatch(addContent(newContent));
@@ -96,48 +97,92 @@ const Main_ModalForm = () => {
       <button onClick={openContentModal}>게시글 쓰기</button>
 
       {isOpen && (
-        <div>
-          <form id="modalForm" className="modalForm" onSubmit={onSubmitHandler}>
-            {/* selectArea */}
+        <StModalBox>
+          <StModalContents>
             <div
-              onClick={() => {
-                setIsOpen((prev) => !prev);
-              }}
+              className="innerContainer"
+              style={{ position: "relative", bottom: "20px" }}
             >
-              <span> {selectedOption || "선택해주세요!"} </span>
-              <span>▼</span>
-            </div>
-            {isOpen && (
-              <div>
-                {options.map((option) => (
-                  <div
-                    key={option}
-                    onClick={() => {
-                      handleOptionClick(option);
+              <form
+                id="modalForm"
+                className="modalForm"
+                onSubmit={onSubmitHandler}
+              >
+                {/* ---selectArea------------------------------------ */}
+                <div>
+                  <DropdownWrapper>
+                    <DropdownHeader
+                      onClick={() => {
+                        setSelectAreaIsOpen((prev) => !prev);
+                      }}
+                    >
+                      <span> {selectedOption || "선택해주세요!"} </span>
+                      <span>▼</span>
+                    </DropdownHeader>
+
+                    {selectAreaIsOpen && (
+                      <DropdownList>
+                        {options.map((option) => (
+                          <DropdownItem
+                            key={option}
+                            onClick={() => {
+                              handleOptionClick(option);
+                            }}
+                          >
+                            {option}
+                          </DropdownItem>
+                        ))}
+                      </DropdownList>
+                    )}
+                  </DropdownWrapper>
+                </div>
+                {/* ---------------------------------------------------- */}
+                <div className="inputArea" style={{ marginTop: "30px" }}>
+                  게시글 제목
+                  <br />
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={onChangeTitleHandler}
+                    style={{
+                      width: "320px",
+                      height: "60px",
+                      marginBottom: "20px",
                     }}
-                  >
-                    {option}
-                  </div>
-                ))}
-              </div>
-            )}
-            {/*  */}
-            게시글 제목
-            <input type="text" value={title} onChange={onChangeTitleHandler} />
-            <br />
-            게시글 내용
-            <textarea type="text" value={body} onChange={onChangeBodyHandler} />
-            <br />
-            <button disabled={isDisabled}>게시글 등록하기</button>
-            <button onClick={closeModal}>창닫기☒</button>
-          </form>
-        </div>
+                  />
+                  <br />
+                  게시글 내용
+                  <br />
+                  <textarea
+                    type="text"
+                    value={body}
+                    onChange={onChangeBodyHandler}
+                    style={{ width: "320px", height: "120px" }}
+                  />
+                  <br />
+                </div>
+                <div
+                  className="buttonArea"
+                  style={{
+                    position: "relative",
+                    top: "60px",
+                    left: "350px",
+                  }}
+                >
+                  <button disabled={isDisabled}>게시글 등록하기</button>
+                  <button onClick={closeModal}>창닫기☒</button>
+                </div>
+              </form>
+            </div>
+          </StModalContents>
+        </StModalBox>
       )}
     </div>
   );
 };
 
-//StC 요소
+//StC
+//모달
 const StModalBox = styled.div`
   position: fixed;
   top: 0;
@@ -156,6 +201,41 @@ const StModalContents = styled.div`
   width: 70%;
   height: 50%;
   border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default Main_ModalForm;
+
+//selectArea
+const DropdownWrapper = styled.div`
+  width: 200px;
+  border: 1px solid #ccc;
+  position: relative;
+  margin-bottom: 10px;
+`;
+
+const DropdownHeader = styled.div`
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const DropdownList = styled.div`
+  border-top: 1px solid #ccc;
+  /* 부모영역 바깥으로 삐져나오게 */
+  position: absolute;
+  width: 200px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+`;
+
+const DropdownItem = styled.div`
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: lightgray;
+  }
+`;
