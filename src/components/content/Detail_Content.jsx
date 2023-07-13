@@ -155,6 +155,9 @@ const Detail_Content = () => {
         <ul
           style={{
             border: "solid",
+            borderColor: "#ecc77d",
+            backgroundColor: "#ecc77d",
+            borderWidth: "5px",
             margin: "10px",
             padding: "10px",
           }}
