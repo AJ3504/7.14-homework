@@ -20,17 +20,10 @@ const userSlice = createSlice({
       console.log(state);
 
       return state.map((user) => {
-        // console.log(action.payload.email); //이렇게 action.payload로 하면 콘솔에 로그인값이 찍히는데,
-        // console.log(action.payload.pw);
-        // console.log(user.email); //user으로 하면 로그인값 안찍히는걸로 봐선
-        // console.log(user.pw);
-
         if (
           user.email === action.payload.email &&
           user.pw === action.payload.pw
         ) {
-          // console.log("제발>", user.email); //user으로 하면 로그인값 안찍히는걸로 봐선
-          // console.log("제발2>", user.pw);
           return { ...user, isLogin: !user.isLogin };
         } else {
           return user;

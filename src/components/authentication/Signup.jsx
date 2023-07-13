@@ -105,6 +105,8 @@ const Signup = () => {
                     password: pw,
                   };
 
+                  // dispatch(join({ name }));
+
                   //
                   signupMutation.mutate(newUser);
 

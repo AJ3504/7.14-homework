@@ -28,10 +28,10 @@ const postLoginUser = async (newLoginUser) => {
   }
 };
 
-//3. 유저 인증 확인 후 데이터 get
+//3. 로컬스토리지에 저장된 토큰을 가지고 get요청
 
 const getVerifiedUserData = async () => {
-  const accessToken = localStorage.getItem("accessToken"); //쿠키에 담아놨던 토큰을
+  const accessToken = localStorage.getItem("accessToken"); //로컬스토리지에 담아놨던 토큰을
   console.log("accessToken 테스트>", accessToken);
   try {
     const response = await axios.get("http://3.38.191.164/user", {

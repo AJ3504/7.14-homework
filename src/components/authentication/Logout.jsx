@@ -6,8 +6,6 @@ function Logout() {
   //UseSelector
   const userList = useSelector((state) => state.userSlice);
   const loginUser = userList.find((user) => user.isLogin === true);
-  // console.log("userList테스트5>", userList);
-  // console.log("loginUser 테스트6>", loginUser);
 
   //hooks
   const dispatch = useDispatch();

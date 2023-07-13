@@ -12,7 +12,7 @@ function Login() {
   const loginMutation = useMutation(postLoginUser, {
     onSuccess: (data) => {
       queryClient.invalidateQueries("login");
-      localStorage.setItem("accessToken", data.token);
+      localStorage.setItem("accessToken", data.token); //로그인post요청 성공(=토큰 옴)하자마자, 로컬스토리지에 저장
       console.log("테스트>", data);
       console.log("로그인 POST 성공하였습니다😀");
     },
