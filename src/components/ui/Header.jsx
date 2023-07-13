@@ -66,7 +66,7 @@ function Header() {
           </button>
         </div>
 
-        <div id="authentication" style={{ display: "flex" }}>
+        <div id="authentication">
           {/* 로그인 했을 때 : 로그아웃 했을 때 */}
           {accessToken ? (
             <div>
@@ -74,7 +74,7 @@ function Header() {
               <Logout />
             </div>
           ) : (
-            <div>
+            <div style={{ display: "flex" }}>
               <Login />
               <Signup />
             </div>

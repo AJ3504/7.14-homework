@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "redux/modules/userSlice";
+import styled from "styled-components";
 
 function Login() {
   //UseState
@@ -119,36 +120,65 @@ function Login() {
         </button>
 
         {isOpen && (
-          <div>
-            <form id="loginModalForm" className="loginModalForm">
-              이메일로 로그인하기
-              <br />
-              <input
-                value={email}
-                onChange={(e) => {
-                  e.preventDefault();
-                  setEmail(e.target.value);
-                }}
-                placeholder="이메일를 입력해주세요."
-              />
-              <input
-                value={pw}
-                onChange={(e) => {
-                  e.preventDefault();
-                  setPw(e.target.value);
-                }}
-                placeholder="비밀번호를 입력해주세요."
-              />
-              <br />
-              <button onClick={handleLoginFormSubmit}>로그인👆</button>
-            </form>
+          <StModalBox>
+            <StModalContents>
+              <div>
+                <form id="loginModalForm" className="loginModalForm">
+                  이메일로 로그인하기
+                  <br />
+                  <input
+                    value={email}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setEmail(e.target.value);
+                    }}
+                    placeholder="이메일를 입력해주세요."
+                  />
+                  <input
+                    value={pw}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setPw(e.target.value);
+                    }}
+                    placeholder="비밀번호를 입력해주세요."
+                  />
+                  <br />
+                  <button onClick={handleLoginFormSubmit}>로그인👆</button>
+                </form>
 
-            <button onClick={closeLoginModal}>창닫기☒</button>
-          </div>
+                <button onClick={closeLoginModal}>창닫기☒</button>
+              </div>
+            </StModalContents>
+          </StModalBox>
         )}
       </div>
     </>
   );
 }
+
+//StC
+//모달
+const StModalBox = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StModalContents = styled.div`
+  background-color: #f7e6c4;
+  padding: 20px;
+  width: 70%;
+  height: 50%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default Login;

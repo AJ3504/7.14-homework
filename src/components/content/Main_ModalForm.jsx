@@ -165,7 +165,7 @@ const Main_ModalForm = () => {
                   className="buttonArea"
                   style={{
                     position: "relative",
-                    top: "60px",
+                    top: "30px",
                     left: "350px",
                   }}
                 >
@@ -206,8 +206,6 @@ const StModalContents = styled.div`
   justify-content: center;
 `;
 
-export default Main_ModalForm;
-
 //selectArea
 const DropdownWrapper = styled.div`
   width: 200px;
@@ -239,3 +237,5 @@ const DropdownItem = styled.div`
     background-color: lightgray;
   }
 `;
+
+export default Main_ModalForm;

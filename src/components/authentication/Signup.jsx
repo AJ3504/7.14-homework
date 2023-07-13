@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { join } from "redux/modules/userSlice";
+import styled from "styled-components";
 
 const Signup = () => {
   //react Query
@@ -68,92 +69,121 @@ const Signup = () => {
         </button>
 
         {isOpen && (
-          <div>
-            <form id="signupModalForm" className="signupModalForm">
-              <br />
-              <input
-                value={email}
-                onChange={(e) => {
-                  e.preventDefault();
-                  setEmail(e.target.value);
-                }}
-                placeholder="이메일를 입력해주세요."
-              />
-              <input
-                value={pw}
-                onChange={(e) => {
-                  e.preventDefault();
-                  setPw(e.target.value);
-                }}
-                placeholder="비밀번호를 입력해주세요."
-              />
-              <input
-                value={confPw}
-                onChange={(e) => {
-                  e.preventDefault();
-                  setConfPw(e.target.value);
-                }}
-                placeholder="입력했던 비밀번호와 동일한 비밀번호를 입력해주세요."
-              />
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="이름을 입력해주세요."
-              />
-              <br />
-              <button
-                onClick={(e) => {
-                  //
-                  e.preventDefault();
+          <StModalBox>
+            <StModalContents>
+              <div>
+                <form id="signupModalForm" className="signupModalForm">
+                  <br />
+                  <input
+                    value={email}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setEmail(e.target.value);
+                    }}
+                    placeholder="이메일를 입력해주세요."
+                  />
+                  <input
+                    value={pw}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setPw(e.target.value);
+                    }}
+                    placeholder="비밀번호를 입력해주세요."
+                  />
+                  <input
+                    value={confPw}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setConfPw(e.target.value);
+                    }}
+                    placeholder="입력했던 비밀번호와 동일한 비밀번호를 입력해주세요."
+                  />
+                  <input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="이름을 입력해주세요."
+                  />
+                  <br />
+                  <button
+                    onClick={(e) => {
+                      //
+                      e.preventDefault();
 
-                  //return 로직
-                  if (
-                    email === "" ||
-                    pw === "" ||
-                    confPw === "" ||
-                    name === ""
-                  ) {
-                    alert(
-                      "이메일, 비밀번호, 확인비밀번호, 이름을 모두 입력해주세요!"
-                    );
-                    return;
-                  } else if (pw !== confPw) {
-                    alert("비밀번호가 다릅니다. 확인해주세요!");
-                    return false;
-                  }
+                      //return 로직
+                      if (
+                        email === "" ||
+                        pw === "" ||
+                        confPw === "" ||
+                        name === ""
+                      ) {
+                        alert(
+                          "이메일, 비밀번호, 확인비밀번호, 이름을 모두 입력해주세요!"
+                        );
+                        return;
+                      } else if (pw !== confPw) {
+                        alert("비밀번호가 다릅니다. 확인해주세요!");
+                        return false;
+                      }
 
-                  const newUser = {
-                    id: email,
-                    password: pw,
-                  };
+                      const newUser = {
+                        id: email,
+                        password: pw,
+                      };
 
-                  signupMutation.mutate(newUser);
+                      signupMutation.mutate(newUser);
 
-                  //
-                  // dispatch(
-                  //   join({
-                  //     pw,
-                  //     email,
-                  //     name,
-                  //   })
-                  // );
+                      //
+                      // dispatch(
+                      //   join({
+                      //     pw,
+                      //     email,
+                      //     name,
+                      //   })
+                      // );
 
-                  setEmail("");
-                  setPw("");
-                  setConfPw("");
-                  setName("");
-                }}
-              >
-                회원가입👆
-              </button>
-            </form>
+                      setEmail("");
+                      setPw("");
+                      setConfPw("");
+                      setName("");
+                    }}
+                  >
+                    회원가입👆
+                  </button>
+                </form>
 
-            <button onClick={closeSignupModal}>창닫기☒</button>
-          </div>
+                <button onClick={closeSignupModal}>창닫기☒</button>
+              </div>
+            </StModalContents>
+          </StModalBox>
         )}
       </div>
     </>
   );
 };
+
+//StC
+//모달
+const StModalBox = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StModalContents = styled.div`
+  background-color: #f7e6c4;
+  padding: 20px;
+  width: 70%;
+  height: 50%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default Signup;
