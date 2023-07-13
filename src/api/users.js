@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Cookies } from "react-cookie";
 
 //1. 유저 회원가입
 const addSignupUser = async (newUser) => {
@@ -27,10 +28,19 @@ const postLoginUser = async (newLoginUser) => {
   }
 };
 
-//3. 유저 인증 확인
-const verifyUser = async () => {
+//3. 유저 인증 확인 후 데이터 get
+
+const getVerifiedUserData = async () => {
+  const accessToken = localStorage.getItem("accessToken"); //쿠키에 담아놨던 토큰을
+  console.log("accessToken 테스트>", accessToken);
   try {
-    const response = await axios.get("http://3.38.191.164/user");
+    const response = await axios.get("http://3.38.191.164/user", {
+      //request headers에 담아서 get요청 보냄
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     console.log("3.유저 인증 콘솔>", response.data);
     return response.data;
   } catch (error) {
@@ -39,4 +49,4 @@ const verifyUser = async () => {
   }
 };
 
-export { addSignupUser, postLoginUser, verifyUser };
+export { addSignupUser, postLoginUser, getVerifiedUserData };

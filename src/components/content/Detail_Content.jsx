@@ -15,7 +15,7 @@ const Detail_Content = () => {
   //hooks
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("콘솔4", location.state);
+  // console.log("콘솔4", location.state);
 
   const prevTitle = location.state.prevTitle;
   const prevBody = location.state.prevBody;
@@ -60,7 +60,7 @@ const Detail_Content = () => {
 
   //기타
   const targetContent = data.find((item) => item.id === contentId);
-  console.log("콘솔1", targetContent);
+  // console.log("콘솔1", targetContent);
 
   //❸게시글 Update
   const editModeHandler = () => {

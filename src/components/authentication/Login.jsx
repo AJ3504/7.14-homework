@@ -1,18 +1,19 @@
-import { postLoginUser } from "api/users";
+import { getVerifiedUserData, postLoginUser } from "api/users";
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "redux/modules/userSlice";
 
 function Login() {
   //react Query
+  // 유저 로그인
   const queryClient = useQueryClient();
-  //새로고침 없이 바로 업데이트되는 로직
   const loginMutation = useMutation(postLoginUser, {
-    //변경이 일어난 경우, 갱신해줘야 하는 데이터 없는지 생각 -> 있다면, 해당 쿼리 key를 invalidate
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries("login");
+      localStorage.setItem("accessToken", data.token);
+      console.log("테스트>", data);
       console.log("로그인 POST 성공하였습니다😀");
     },
   });
@@ -25,11 +26,19 @@ function Login() {
   //UseSelector
   const userList = useSelector((state) => state.userSlice);
   const loginUser = userList.find((user) => user.isLogin === true);
-  // console.log("userList테스트>", userList);
-  // console.log("loginUser 테스트2>", loginUser);
 
-  //hooks
-  const dispatch = useDispatch();
+  //유저 인증 확인 후 데이터 get
+  const { isLoading, isError, userData } = useQuery(
+    "user",
+    getVerifiedUserData
+  );
+
+  if (isLoading) {
+    return <h1>유저데이터 로딩중입니다🥲</h1>;
+  }
+  if (isError) {
+    return <h1>유저데이터 가져오는데 에러가 발생했습니다🥲</h1>;
+  }
 
   //Event Handler
   const openLoginModal = () => {
@@ -84,6 +93,7 @@ function Login() {
                   const newLoginUser = {
                     id: email,
                     password: pw,
+                    withCredentials: true,
                   };
 
                   //
