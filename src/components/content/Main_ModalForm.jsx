@@ -94,7 +94,11 @@ const Main_ModalForm = () => {
 
   return (
     <div>
-      <button onClick={openContentModal}>게시글 쓰기</button>
+      <div style={{ display: "flex", paddingRight: "20px" }}>
+        <button onClick={openContentModal} style={{ marginLeft: "auto" }}>
+          게시글 쓰기
+        </button>
+      </div>
 
       {isOpen && (
         <StModalBox>

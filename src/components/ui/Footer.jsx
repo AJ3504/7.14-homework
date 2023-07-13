@@ -3,7 +3,7 @@ import React from "react";
 function Footer() {
   return (
     <div
-      id="wrapp"
+      id="wrap"
       style={{
         minHeight: "100vh",
         position: "relative",
@@ -17,6 +17,8 @@ function Footer() {
           bottom: "0px",
           position: "absolute",
           backgroundColor: "#606C5D",
+          width: "100%",
+          position: "fixed",
         }}
       >
         푸터입니다

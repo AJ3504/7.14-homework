@@ -18,7 +18,7 @@ const Router = () => {
         <Route path="/detail/:contentId" element={<Detail />} />
       </Routes>
 
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 };
