@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import shortid from "shortid";
+import { StButton } from "styled-components/StButton";
 
 const Detail_Content = () => {
   //UseSelectors
@@ -144,7 +145,7 @@ const Detail_Content = () => {
                 value={newBody}
                 onChange={onChangeNewBodyHandler}
               />
-              <button disabled={isDisabled}>수정 완료</button>
+              <StButton disabled={isDisabled}>수정 완료</StButton>
             </form>
           </>
         ) : null}
@@ -169,9 +170,11 @@ const Detail_Content = () => {
             {targetContent?.body}
           </li>
           <div>
-            <button onClick={editModeHandler}>수정하기</button>
-            <button onClick={() => deleteHandler(contentId)}>삭제하기</button>
-            <button onClick={() => navigate("/")}>이전 화면으로</button>
+            <StButton onClick={editModeHandler}>수정하기</StButton>
+            <StButton onClick={() => deleteHandler(contentId)}>
+              삭제하기
+            </StButton>
+            <StButton onClick={() => navigate("/")}>이전 화면으로</StButton>
           </div>
         </ul>
       </div>

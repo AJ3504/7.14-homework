@@ -1,7 +1,9 @@
+import { hover } from "@testing-library/user-event/dist/hover";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "redux/modules/userSlice";
+import { StButton } from "styled-components/StButton";
 
 function Logout() {
   //UseSelector
@@ -31,14 +33,18 @@ function Logout() {
   return (
     <>
       <div style={{ height: "40%", marginTop: "20px" }}>
-        <button
+        <StButton
           type="submit"
-          style={{ height: "100%" }}
+          style={{
+            height: "100%",
+            backgroundColor: "#a1b39b66",
+            color: "black",
+          }}
           onClick={onClickLogoutHandler}
           // disabled={isDisabled}
         >
           로그아웃👆
-        </button>
+        </StButton>
       </div>
     </>
   );

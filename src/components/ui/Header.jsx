@@ -4,6 +4,7 @@ import Logout from "components/authentication/Logout";
 import Signup from "components/authentication/Signup";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { StButton } from "styled-components/StButton";
 
 function Header() {
   //useStates
@@ -39,7 +40,10 @@ function Header() {
         }}
       >
         <div style={{ height: "40%", marginTop: "20px" }}>
-          <button type="submit" style={{ height: "100%" }}>
+          <button
+            type="submit"
+            style={{ height: "100%", backgroundColor: "#a1b39b66" }}
+          >
             A
           </button>{" "}
           blog
@@ -60,10 +64,21 @@ function Header() {
                 e.preventDefault();
                 setSearchText(e.target.value);
               }}
-              style={{ height: "25px", width: "300px" }}
+              style={{
+                height: "25px",
+                width: "300px",
+                backgroundColor: "white",
+              }}
             />
           </form>
-          <button type="submit" style={{ height: "30px" }}>
+          <button
+            type="submit"
+            style={{
+              height: "30px",
+              backgroundColor: "#a1b39b66",
+              marginLeft: "10px",
+            }}
+          >
             🔍
           </button>
         </div>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "redux/modules/userSlice";
 import styled from "styled-components";
+import { StButton } from "styled-components/StButton";
 
 function Login() {
   //UseState
@@ -110,14 +111,14 @@ function Login() {
   return (
     <>
       <div style={{ height: "40%", marginTop: "20px" }}>
-        <button
+        <StButton
           type="submit"
           style={{ height: "100%" }}
           onClick={openLoginModal}
           // disabled={isDisabled}
         >
           로그인
-        </button>
+        </StButton>
 
         {isOpen && (
           <StModalBox>
@@ -143,10 +144,10 @@ function Login() {
                     placeholder="비밀번호를 입력해주세요."
                   />
                   <br />
-                  <button onClick={handleLoginFormSubmit}>로그인👆</button>
+                  <StButton onClick={handleLoginFormSubmit}>로그인👆</StButton>
                 </form>
 
-                <button onClick={closeLoginModal}>창닫기☒</button>
+                <StButton onClick={closeLoginModal}>창닫기☒</StButton>
               </div>
             </StModalContents>
           </StModalBox>

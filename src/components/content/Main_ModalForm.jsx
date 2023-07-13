@@ -6,6 +6,7 @@ import { addContent } from "api/contents";
 import shortid from "shortid";
 import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
+import { StButton } from "styled-components/StButton";
 
 const Main_ModalForm = () => {
   //react Query
@@ -95,9 +96,9 @@ const Main_ModalForm = () => {
   return (
     <div>
       <div style={{ display: "flex", paddingRight: "20px" }}>
-        <button onClick={openContentModal} style={{ marginLeft: "auto" }}>
+        <StButton onClick={openContentModal} style={{ marginLeft: "auto" }}>
           게시글 쓰기
-        </button>
+        </StButton>
       </div>
 
       {isOpen && (
@@ -166,15 +167,15 @@ const Main_ModalForm = () => {
                   <br />
                 </div>
                 <div
-                  className="buttonArea"
+                  className="StButtonArea"
                   style={{
                     position: "relative",
                     top: "30px",
                     left: "350px",
                   }}
                 >
-                  <button disabled={isDisabled}>게시글 등록하기</button>
-                  <button onClick={closeModal}>창닫기☒</button>
+                  <StButton disabled={isDisabled}>게시글 등록하기</StButton>
+                  <StButton onClick={closeModal}>창닫기☒</StButton>
                 </div>
               </form>
             </div>

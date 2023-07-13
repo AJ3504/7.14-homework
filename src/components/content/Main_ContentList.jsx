@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { StButton } from "styled-components/StButton";
 
 const Main_ContentList = () => {
   //hooks
@@ -59,9 +60,9 @@ const Main_ContentList = () => {
                   <br />
                   {content?.newBody ? content?.newBody : content?.body}
                 </li>
-                <button onClick={() => onContentClick(content)}>
+                <StButton onClick={() => onContentClick(content)}>
                   게시글 상세보기
-                </button>
+                </StButton>
               </ul>
             </div>
           </div>
