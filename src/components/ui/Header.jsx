@@ -1,8 +1,26 @@
-import React, { useState } from "react";
+import { getVerifiedUserData } from "api/users";
+import Login from "components/authentication/Login";
+import Logout from "components/authentication/Logout";
+import Signup from "components/authentication/Signup";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { StButton } from "styled-components/StButton";
 
 function Header() {
   //useStates
   const [searchText, setSearchText] = useState("");
+
+  //UseSelector
+  const userList = useSelector((state) => state.userSlice);
+  const loginUser = userList.find((user) => user.isLogin === true);
+
+  //
+  const accessToken = localStorage.getItem("accessToken");
+
+  //
+  useEffect(() => {
+    getVerifiedUserData();
+  }, [accessToken]);
 
   return (
     <>
@@ -11,15 +29,31 @@ function Header() {
         className="header1"
         style={{
           display: "flex",
-          justifyContent: "space-between",
-          backgroundColor: "#606C5D",
+          justifyContent: "space-around",
+          backgroundColor: "#1a5d1aca",
+          color: "white",
+          height: "70px",
+          width: "100%",
+          position: "fixed",
         }}
       >
-        <>
-          <button type="submit">A</button> blog
-        </>
+        <div style={{ height: "40%", marginTop: "20px" }}>
+          <button
+            type="submit"
+            style={{ height: "100%", backgroundColor: "#a1b39b66" }}
+          >
+            A
+          </button>{" "}
+          blog
+        </div>
 
-        <>
+        <div
+          style={{
+            height: "100%",
+            marginTop: "20px",
+            display: "flex",
+          }}
+        >
           <form>
             <input
               type="text"
@@ -28,32 +62,67 @@ function Header() {
                 e.preventDefault();
                 setSearchText(e.target.value);
               }}
+              style={{
+                height: "25px",
+                width: "300px",
+                backgroundColor: "white",
+              }}
             />
           </form>
-          <button type="submit">🔍</button>
-        </>
+          <button
+            type="submit"
+            style={{
+              height: "30px",
+              backgroundColor: "#a1b39b66",
+              marginLeft: "10px",
+            }}
+          >
+            🔍
+          </button>
+        </div>
 
-        <>
-          <button type="submit">로그인</button>
-        </>
+        <div id="authentication">
+          {/* 로그인 했을 때 : 로그아웃 했을 때 */}
+          {loginUser ? (
+            <div style={{ display: "flex" }}>
+              <div style={{ position: "relative", top: "25px", right: "10px" }}>
+                {loginUser.userName}님 반갑습니다!
+              </div>
+
+              <div
+                style={{ position: "relative", bottom: "5px", left: "10px" }}
+              >
+                <Logout />
+              </div>
+            </div>
+          ) : (
+            <div style={{ display: "flex" }}>
+              <Login />
+              <Signup />
+            </div>
+          )}
+          {/* 디스패치 테스트용 */}
+          {/* <Logout />
+          <Login />
+          <Signup /> */}
+        </div>
       </div>
-
-      <hr />
 
       {/* 헤더2 */}
       <div
         className="header2"
-        style={{ display: "flex", justifyContent: "space-between" }}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          height: "40px",
+          paddingTop: "70px",
+        }}
       >
-        <>
-          <h3>블로그홈</h3>
-        </>
-        <>
-          <h3>주제별 보기</h3>
-        </>
-        <>
-          <h3>이달의 블로그</h3>
-        </>
+        <h3 style={{ marginTop: "13px", paddingLeft: "20px" }}>블로그홈</h3>
+        <h3 style={{ marginTop: "13px" }}>주제별 보기</h3>
+        <h3 style={{ marginTop: "13px", paddingRight: "20px" }}>
+          이달의 블로그
+        </h3>
       </div>
 
       <hr />

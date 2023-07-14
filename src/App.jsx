@@ -2,13 +2,16 @@ import logo from "./logo.svg";
 import "./App.css";
 import Router from "shared/Router";
 import GlobalStyle from "./GlobalStyle";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <Router />
-    </div>
+    </QueryClientProvider>
   );
 };
 
