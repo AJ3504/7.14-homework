@@ -1,11 +1,19 @@
-import React from "react";
-import { combineReducers, createStore } from "redux";
-import content from "redux/modules/content";
+import { configureStore } from "@reduxjs/toolkit";
+import contentsSlice from "redux/modules/contentsSlice";
+import userSlice from "redux/modules/userSlice";
 
-const rootReducer = combineReducers({
-  content: content,
+//ASIS
+// const rootReducer = combineReducers({
+//   content: content,
+// });
+// const store = configureStore(rootReducer);
+
+//TODO
+const store = configureStore({
+  reducer: {
+    contentsSlice: contentsSlice,
+    userSlice: userSlice,
+  },
 });
-
-const store = createStore(rootReducer);
 
 export default store;
