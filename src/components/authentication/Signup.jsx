@@ -126,21 +126,21 @@ const Signup = () => {
                         return false;
                       }
 
+                      //
+                      dispatch(
+                        join({
+                          pw,
+                          email,
+                          name,
+                        })
+                      );
+
                       const newUser = {
                         id: email,
                         password: pw,
                       };
 
                       signupMutation.mutate(newUser);
-
-                      //
-                      // dispatch(
-                      //   join({
-                      //     pw,
-                      //     email,
-                      //     name,
-                      //   })
-                      // );
 
                       setEmail("");
                       setPw("");

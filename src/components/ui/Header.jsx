@@ -13,8 +13,6 @@ function Header() {
   //UseSelector
   const userList = useSelector((state) => state.userSlice);
   const loginUser = userList.find((user) => user.isLogin === true);
-  // console.log("userList테스트5>", userList);
-  // console.log("loginUser 테스트6>", loginUser);
 
   //
   const accessToken = localStorage.getItem("accessToken");
@@ -85,10 +83,17 @@ function Header() {
 
         <div id="authentication">
           {/* 로그인 했을 때 : 로그아웃 했을 때 */}
-          {accessToken ? (
-            <div>
-              {/* {loginUser.userName}님 반갑습니다! */}
-              <Logout />
+          {loginUser ? (
+            <div style={{ display: "flex" }}>
+              <div style={{ position: "relative", top: "25px", right: "10px" }}>
+                {loginUser.userName}님 반갑습니다!
+              </div>
+
+              <div
+                style={{ position: "relative", bottom: "5px", left: "10px" }}
+              >
+                <Logout />
+              </div>
             </div>
           ) : (
             <div style={{ display: "flex" }}>
@@ -96,7 +101,7 @@ function Header() {
               <Signup />
             </div>
           )}
-          {/* 토큰 갱신 테스트용 */}
+          {/* 디스패치 테스트용 */}
           {/* <Logout />
           <Login />
           <Signup /> */}

@@ -16,6 +16,8 @@ function Login() {
   //UseSelector
   const userList = useSelector((state) => state.userSlice);
   const loginUser = userList.find((user) => user.isLogin === true);
+  console.log("테1", loginUser);
+  console.log("테0", userList);
 
   //hooks
   const dispatch = useDispatch();
@@ -64,11 +66,7 @@ function Login() {
 
   //Event Handler
   const openLoginModal = () => {
-    if (!accessToken) {
-      setIsOpen(true);
-    } else {
-      return;
-    }
+    setIsOpen(true);
   };
 
   //로그인폼 제출 핸들러
@@ -82,6 +80,13 @@ function Login() {
       return;
     }
 
+    dispatch(
+      login({
+        pw,
+        email,
+      })
+    );
+
     const newLoginUser = {
       id: email,
       password: pw,
@@ -90,14 +95,6 @@ function Login() {
 
     //
     loginMutation.mutate(newLoginUser);
-
-    //
-    // dispatch(
-    //   login({
-    //     pw,
-    //     email,
-    //   })
-    // );
 
     //
     setEmail("");

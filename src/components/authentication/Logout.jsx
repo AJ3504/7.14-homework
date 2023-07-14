@@ -23,9 +23,10 @@ function Logout() {
     e.preventDefault();
     const isConfirmed = window.confirm("로그아웃하시겠습니까?");
     if (isConfirmed) {
-      localStorage.removeItem("accessToken");
       //
-      // dispatch(logout(loginUser.email));
+      dispatch(logout(loginUser.email));
+      //
+      localStorage.removeItem("accessToken");
       alert("로그아웃되었습니다!");
     }
   };
@@ -43,7 +44,9 @@ function Logout() {
           onClick={onClickLogoutHandler}
           // disabled={isDisabled}
         >
-          로그아웃👆
+          <div style={{ position: "relative", bottom: "5px", left: "1px" }}>
+            로그아웃👆
+          </div>
         </StButton>
       </div>
     </>
