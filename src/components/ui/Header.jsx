@@ -5,6 +5,7 @@ import Signup from "components/authentication/Signup";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { StButton } from "styled-components/StButton";
+import { Link } from "react-router-dom";
 
 function Header() {
   //useStates
@@ -118,8 +119,14 @@ function Header() {
           paddingTop: "70px",
         }}
       >
-        <h3 style={{ marginTop: "13px", paddingLeft: "20px" }}>블로그홈</h3>
-        <h3 style={{ marginTop: "13px" }}>주제별 보기</h3>
+        <h3 style={{ marginTop: "13px", paddingLeft: "20px" }}>
+          <Link to={"/"}>블로그홈</Link>
+        </h3>
+        <h3 style={{ marginTop: "13px" }}>
+          <Link to={"/DateCourse"}>데이트 코스 추천</Link>
+        </h3>
+        <h3 style={{ marginTop: "13px" }}>엔터테인먼트/예술</h3>
+        <h3 style={{ marginTop: "13px" }}>책</h3>
         <h3 style={{ marginTop: "13px", paddingRight: "20px" }}>
           이달의 블로그
         </h3>

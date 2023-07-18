@@ -1,6 +1,7 @@
 import Login from "components/authentication/Login";
 import Footer from "components/ui/Footer";
 import Header from "components/ui/Header";
+import KakaoMap from "map/KakaoMap";
 import Detail from "pages/Detail";
 import Main from "pages/Main";
 
@@ -16,6 +17,7 @@ const Router = () => {
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/detail/:contentId" element={<Detail />} />
+        <Route path="/dateCourse" element={<KakaoMap />} />
       </Routes>
 
       {/* <Footer /> */}
