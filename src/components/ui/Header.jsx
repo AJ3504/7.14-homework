@@ -111,7 +111,7 @@ function Header() {
 
       {/* 헤더2 */}
       <div
-        className="header2"
+        className="categoryMenuBar"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -123,12 +123,13 @@ function Header() {
           <Link to={"/"}>블로그홈</Link>
         </h3>
         <h3 style={{ marginTop: "13px" }}>
-          <Link to={"/DateCourse"}>데이트 코스 추천</Link>
+          <Link to={"/dateCourse"}>데이트코스 추천</Link>
         </h3>
-        <h3 style={{ marginTop: "13px" }}>엔터테인먼트/예술</h3>
-        <h3 style={{ marginTop: "13px" }}>책</h3>
+        <h3 style={{ marginTop: "13px" }}>
+          <Link to={"/art"}>엔터테인먼트/예술</Link>
+        </h3>
         <h3 style={{ marginTop: "13px", paddingRight: "20px" }}>
-          이달의 블로그
+          <Link to={"/book"}>책</Link>
         </h3>
       </div>
 

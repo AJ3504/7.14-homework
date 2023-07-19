@@ -78,6 +78,7 @@ const Main_ModalForm = () => {
       title,
       body,
       id: shortid.generate(),
+      category: selectedOption,
       //유저정보
       // writerId: loginUser.id,
       // writerName: loginUser.userName,
@@ -130,6 +131,7 @@ const Main_ModalForm = () => {
                         {options.map((option) => (
                           <DropdownItem
                             key={option}
+                            value={selectedOption}
                             onClick={() => {
                               handleOptionClick(option);
                             }}
