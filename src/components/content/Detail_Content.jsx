@@ -11,15 +11,15 @@ import styled from "styled-components";
 const Detail_Content = () => {
   //useStates
   const [editMode, setEditMode] = useState(false);
-  const [selectAreaIsOpen, setSelectAreaIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [editSelectAreaIsOpen, setEditSelectAreaIsOpen] = useState(false);
+  const [editSelectedOption, setEditSelectedOption] = useState(null);
 
   //기타
   const options = ["엔터테인먼트/예술", "책", "데이트코스 추천"];
   //Event Handler
   const handleOptionClick = (option) => {
-    setSelectedOption(option); //해당 필드 클릭시, null->option값으로 바뀌고,
-    setSelectAreaIsOpen(false); //닫힘
+    setEditSelectedOption(option); //해당 필드 클릭시, null->option값으로 바뀌고,
+    setEditSelectAreaIsOpen(false); //닫힘
   };
 
   //custom hook
@@ -111,6 +111,7 @@ const Detail_Content = () => {
       body: newBody,
       id: contentId,
       isModified: true,
+      category: editSelectedOption,
     };
     //
     // dispatch(editContent(editedContent));
@@ -153,19 +154,19 @@ const Detail_Content = () => {
                 <DropdownWrapper>
                   <DropdownHeader
                     onClick={() => {
-                      setSelectAreaIsOpen((prev) => !prev);
+                      setEditSelectAreaIsOpen((prev) => !prev);
                     }}
                   >
-                    <span> {selectedOption || "선택해주세요!"} </span>
+                    <span> {editSelectedOption || "선택해주세요!"} </span>
                     <span>▼</span>
                   </DropdownHeader>
 
-                  {selectAreaIsOpen && (
+                  {editSelectAreaIsOpen && (
                     <DropdownList>
                       {options.map((option) => (
                         <DropdownItem
                           key={option}
-                          value={selectedOption}
+                          value={editSelectedOption}
                           onClick={() => {
                             handleOptionClick(option);
                           }}
