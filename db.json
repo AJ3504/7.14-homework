@@ -4,7 +4,7 @@
       "title": "[개미개미개미]",
       "body": "도서관에서 맨날 봤었던 두꺼운책",
       "id": "ksKRTkt3k",
-      "category": "엔터테인먼트/예술",
+      "category": "책",
       "isModified": true
     },
     {
@@ -24,7 +24,7 @@
       "title": "[미움받을 용기]",
       "body": "1,2권 모두 다 읽었습니다. 스승과 제자의 대화로 이루어진 구성이 더 와닿았어요.",
       "id": "W7fBwZana",
-      "category": "엔터테인먼트/예술",
+      "category": "책",
       "isModified": true
     },
     {
@@ -44,6 +44,13 @@
       "body": "밤에 드라이브 가서 하늘 보며 멍때리고 싶어요",
       "id": "JuNpjSAPy",
       "category": "데이트코스 추천",
+      "isModified": true
+    },
+    {
+      "title": "[뉴진스 슈퍼샤이]",
+      "body": "노래 너무 좋아요!",
+      "id": "11rzxWN-z",
+      "category": "엔터테인먼트/예술",
       "isModified": true
     }
   ]
