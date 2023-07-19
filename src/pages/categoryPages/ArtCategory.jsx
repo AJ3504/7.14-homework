@@ -40,7 +40,7 @@ const ArtCategory = () => {
       {categorizedData?.map((content) => {
         return (
           <div
-            key={content.category}
+            key={content.id}
             style={{
               border: "solid",
               borderColor: "#ecc77d",
