@@ -6,10 +6,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import shortid from "shortid";
 import { StButton } from "styled-components/StButton";
+import styled from "styled-components";
 
 const Detail_Content = () => {
-  //UseSelectors
+  //useStates
+  const [editMode, setEditMode] = useState(false);
+  const [selectAreaIsOpen, setSelectAreaIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
 
+  //기타
+  const options = ["엔터테인먼트/예술", "책", "데이트코스 추천"];
+  //Event Handler
+  const handleOptionClick = (option) => {
+    setSelectedOption(option); //해당 필드 클릭시, null->option값으로 바뀌고,
+    setSelectAreaIsOpen(false); //닫힘
+  };
+
+  //custom hook
+  //UseSelectors
   const userList = useSelector((state) => state.userSlice);
   const loginUser = userList.find((user) => user.isLogin === true);
 
@@ -23,9 +37,8 @@ const Detail_Content = () => {
   const contentId = location.state.contentId;
   const prevWriterId = location.state.prevWriterId;
   const prevWriterName = location.state.prevWriterName;
+  const prevCategory = location.state.prevCategory;
 
-  //UseStates
-  const [editMode, setEditMode] = useState(false);
   //custom hook
   const [newTitle, onChangeNewTitleHandler, resetNewTitle] =
     useInput(prevTitle);
@@ -135,23 +148,55 @@ const Detail_Content = () => {
         {editMode ? (
           <>
             <form onSubmit={onSubmitEditHandler}>
-              <input
-                type="text"
-                value={newTitle}
-                onChange={onChangeNewTitleHandler}
-              />
-              <input
-                type="text"
-                value={newBody}
-                onChange={onChangeNewBodyHandler}
-              />
-              <StButton disabled={isDisabled}>수정 완료</StButton>
+              {/* ---selectArea------------------------------------ */}
+              <div>
+                <DropdownWrapper>
+                  <DropdownHeader
+                    onClick={() => {
+                      setSelectAreaIsOpen((prev) => !prev);
+                    }}
+                  >
+                    <span> {selectedOption || "선택해주세요!"} </span>
+                    <span>▼</span>
+                  </DropdownHeader>
+
+                  {selectAreaIsOpen && (
+                    <DropdownList>
+                      {options.map((option) => (
+                        <DropdownItem
+                          key={option}
+                          value={selectedOption}
+                          onClick={() => {
+                            handleOptionClick(option);
+                          }}
+                        >
+                          {option}
+                        </DropdownItem>
+                      ))}
+                    </DropdownList>
+                  )}
+                </DropdownWrapper>
+              </div>
+              {/* ---------------------------------------------------- */}
+              <div className="editInputArea">
+                <input
+                  type="text"
+                  value={newTitle}
+                  onChange={onChangeNewTitleHandler}
+                />
+                <input
+                  type="text"
+                  value={newBody}
+                  onChange={onChangeNewBodyHandler}
+                />
+                <StButton disabled={isDisabled}>수정 완료</StButton>
+              </div>
             </form>
           </>
         ) : null}
       </div>
 
-      {/* ------결과물(수정결과물 : 기존결과물)------ */}
+      {/* ------결과물------ */}
       <div className="container">
         <ul
           style={{
@@ -163,7 +208,7 @@ const Detail_Content = () => {
             padding: "10px",
           }}
         >
-          <li>
+          <li key={targetContent?.id}>
             {targetContent?.title}
 
             <br />
@@ -182,3 +227,35 @@ const Detail_Content = () => {
   );
 };
 export default Detail_Content;
+
+//selectArea
+const DropdownWrapper = styled.div`
+  width: 200px;
+  border: 1px solid #ccc;
+  position: relative;
+  margin-bottom: 10px;
+`;
+
+const DropdownHeader = styled.div`
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const DropdownList = styled.div`
+  border-top: 1px solid #ccc;
+  /* 부모영역 바깥으로 삐져나오게 */
+  position: absolute;
+  width: 200px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+`;
+
+const DropdownItem = styled.div`
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: lightgray;
+  }
+`;

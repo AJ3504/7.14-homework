@@ -31,6 +31,7 @@ const Main_ContentList = () => {
         contentId: content.id,
         prevWriterId: content.writerId,
         prevWriterName: content.writerName,
+        prevCategory: content.category,
       },
     });
   };
@@ -53,12 +54,12 @@ const Main_ContentList = () => {
               fontWeight: "bold",
             }}
           >
-            <div className="editedContent">
+            <div className="mainContentList">
               <ul>
                 <li>
-                  {content?.newTitle ? content?.newTitle : content?.title}
+                  {content.title}
                   <br />
-                  {content?.newBody ? content?.newBody : content?.body}
+                  {content.body}
                 </li>
                 <StButton onClick={() => onContentClick(content)}>
                   게시글 상세보기
